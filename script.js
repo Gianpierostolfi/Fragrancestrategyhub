@@ -7,7 +7,6 @@ let state = {
 };
 
 // CONFIGURAZIONE AI
-// Spezziamo il token in due variabili diverse per protezione
 const parte1 = "hf_GmllffTwtJqP"; 
 const parte2 = "yzepGhzDifcXYcecVBAXvH"; 
 const HF_TOKEN = (parte1 + parte2).trim();
@@ -18,7 +17,8 @@ window.onload = async () => {
     db.accessori = await caricaCSV('list_cap2.csv');
     inizializzaSidebar();
     caricaCategoria('bottiglia');
-    document.getElementById('input-nome-preventivo').addEventListener('input', gestisciSblocchi);
+    const inputNome = document.getElementById('input-nome-preventivo');
+    if(inputNome) inputNome.addEventListener('input', gestisciSblocchi);
 };
 
 async function caricaCSV(file) {
@@ -39,11 +39,14 @@ async function caricaCSV(file) {
 
 function inizializzaSidebar() {
     const categorie = ['bottiglia', 'tappo', 'cache', 'pompa'];
-    document.getElementById('sidebar-categorie').innerHTML = categorie.map(cat => `
-        <div class="cat-item ${state.categoriaAttiva === cat ? 'active' : ''}" onclick="caricaCategoria('${cat}')">
-            ${cat.toUpperCase()}
-        </div>
-    `).join('');
+    const sidebar = document.getElementById('sidebar-categorie');
+    if(sidebar) {
+        sidebar.innerHTML = categorie.map(cat => `
+            <div class="cat-item ${state.categoriaAttiva === cat ? 'active' : ''}" onclick="caricaCategoria('${cat}')">
+                ${cat.toUpperCase()}
+            </div>
+        `).join('');
+    }
 }
 
 function caricaCategoria(cat) {
@@ -54,13 +57,16 @@ function caricaCategoria(cat) {
 }
 
 function mostraProdotti(prodotti) {
-    document.getElementById('grid-prodotti').innerHTML = prodotti.map(p => `
-        <div class="item-card" onclick="selezionaProdotto('${state.categoriaAttiva}', '${p.Codice}')">
-            <img src="assets/${p.Immagine}" onerror="this.src='https://via.placeholder.com/150'">
-            <h4>${p.Codice}</h4>
-            <p>${p.Descrizione || ''}</p>
-        </div>
-    `).join('');
+    const grid = document.getElementById('grid-prodotti');
+    if(grid) {
+        grid.innerHTML = prodotti.map(p => `
+            <div class="item-card" onclick="selezionaProdotto('${state.categoriaAttiva}', '${p.Codice}')">
+                <img src="assets/${p.Immagine}" onerror="this.src='https://via.placeholder.com/150'">
+                <h4>${p.Codice}</h4>
+                <p>${p.Descrizione || ''}</p>
+            </div>
+        `).join('');
+    }
 }
 
 function selezionaProdotto(cat, codice) {
@@ -71,16 +77,19 @@ function selezionaProdotto(cat, codice) {
 }
 
 function aggiornaMiniature() {
-    document.getElementById('miniatures-container').innerHTML = Object.entries(state.selezioni).map(([cat, prod]) => {
-        if (!prod) return `<div class="miniature empty"><span>${cat}</span></div>`;
-        return `
-            <div class="miniature">
-                <img src="assets/${prod.Immagine}">
-                <span>${prod.Codice}</span>
-                <button class="remove-btn" onclick="rimuoviSelezione('${cat}', event)">×</button>
-            </div>
-        `;
-    }).join('');
+    const container = document.getElementById('miniatures-container');
+    if(container) {
+        container.innerHTML = Object.entries(state.selezioni).map(([cat, prod]) => {
+            if (!prod) return `<div class="miniature empty"><span>${cat}</span></div>`;
+            return `
+                <div class="miniature">
+                    <img src="assets/${prod.Immagine}">
+                    <span>${prod.Codice}</span>
+                    <button class="remove-btn" onclick="rimuoviSelezione('${cat}', event)">×</button>
+                </div>
+            `;
+        }).join('');
+    }
 }
 
 function rimuoviSelezione(cat, event) {
@@ -92,15 +101,19 @@ function rimuoviSelezione(cat, event) {
 
 function resetConfiguratore() {
     state.selezioni = { bottiglia: null, tappo: null, cache: null, pompa: null };
+    const inputNome = document.getElementById('input-nome-preventivo');
+    if(inputNome) inputNome.value = "";
     aggiornaMiniature();
     gestisciSblocchi();
-    alert("Configuratore resettato.");
 }
 
 function gestisciSblocchi() {
-    const nome = document.getElementById('input-nome-preventivo').value.trim();
+    const nomeInput = document.getElementById('input-nome-preventivo');
+    const nome = nomeInput ? nomeInput.value.trim() : "";
     const btn = document.getElementById('btn-genera-render');
-    btn.disabled = !(nome && state.selezioni.bottiglia && state.selezioni.tappo);
+    if(btn) {
+        btn.disabled = !(nome && state.selezioni.bottiglia && state.selezioni.tappo);
+    }
 }
 
 async function generaRender() {
@@ -113,9 +126,8 @@ async function generaRender() {
     const infoDiv = document.getElementById('contenuto-preventivo');
 
     statusDiv.innerHTML = "L'AI sta creando il tuo flacone personalizzato... <br><small>(Attendi circa 20 secondi)</small>";
-    imgRender.style.display = "none";
+    if(imgRender) imgRender.style.display = "none";
 
-    // Preparazione dati per il riepilogo
     let html = "<h3>Dettagli Configurazione:</h3><ul style='list-style:none; padding:0;'>";
     if (state.selezioni.bottiglia) html += `<li><strong>Bottiglia:</strong> ${state.selezioni.bottiglia.Codice}</li>`;
     if (state.selezioni.tappo) html += `<li><strong>Tappo:</strong> ${state.selezioni.tappo.Codice}</li>`;
@@ -124,36 +136,29 @@ async function generaRender() {
     html += "</ul>";
     infoDiv.innerHTML = html;
 
-    // COSTRUZIONE PROMPT
     const descBottiglia = state.selezioni.bottiglia ? state.selezioni.bottiglia.Forma : "luxury";
     const descTappo = state.selezioni.tappo ? state.selezioni.tappo.Descrizione : "elegant cap";
-    const promptAI = `A professional studio photography of a luxury perfume bottle named '${nomeProgetto}', ${descBottiglia} glass shape, with a ${descTappo}, elegant lighting, white background, 8k resolution, cinematic composition`;
+    const promptAI = `A professional studio photography of a luxury perfume bottle named '${nomeProgetto}', ${descBottiglia} glass shape, high-end ${descTappo}, elegant lighting, white background, 8k resolution`;
 
     try {
-        // SOLUZIONE CORS: Invio del prompt come testo semplice
         const response = await fetch(MODEL_URL, {
             method: "POST",
-            headers: {
-                "Authorization": `Bearer ${HF_TOKEN.trim()}`
-            },
-            body: promptAI 
+            headers: { "Authorization": `Bearer ${HF_TOKEN}` },
+            body: JSON.stringify({ inputs: promptAI })
         });
 
-        if (!response.ok) {
-            throw new Error("Il server AI è occupato o il token è scaduto. Riprova tra un momento.");
-        }
+        if (!response.ok) throw new Error("Il server AI è occupato. Riprova tra un momento.");
 
         const blob = await response.blob();
         const imageUrl = URL.createObjectURL(blob);
 
         statusDiv.innerText = "Render completato con successo!";
-        imgRender.src = imageUrl;
-        imgRender.style.display = "block";
-
+        if(imgRender) {
+            imgRender.src = imageUrl;
+            imgRender.style.display = "block";
+        }
     } catch (error) {
-        console.error(error);
-        statusDiv.innerHTML = `<span style="color:red;">Errore: ${error.message}</span><br>
-        <button onclick="generaRender()" style="margin-top:10px; padding:5px 15px; cursor:pointer;">Riprova</button>`;
+        statusDiv.innerHTML = `<span style="color:red;">Errore: ${error.message}</span><br><button onclick="generaRender()" style="margin-top:10px;">Riprova</button>`;
     }
 }
 
@@ -164,8 +169,9 @@ function cambiaPagina(id) {
     const target = document.getElementById(id);
     if(target) target.classList.add('active');
 
-    if(id === 'preventivo-page') {
-        document.getElementById('tab-preventivo').style.display = "block";
-        document.getElementById('tab-preventivo').classList.add('active');
+    const tabPrev = document.getElementById('tab-preventivo');
+    if(id === 'preventivo-page' && tabPrev) {
+        tabPrev.style.display = "block";
+        tabPrev.classList.add('active');
     }
 }
