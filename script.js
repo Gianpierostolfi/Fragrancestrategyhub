@@ -198,7 +198,7 @@ async function generaRender() {
             {
                 method: "POST",
                 headers: {
-                    "Authorization": "Bearer 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", // <--- INSERISCI IL TUO TOKEN QUI
+                    "Authorization": "Bearer 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", // <--- INSERISCI IL TUO TOKEN QUI
                     "Content-Type": "application/json",
                 },
                 body: JSON.stringify({ 
