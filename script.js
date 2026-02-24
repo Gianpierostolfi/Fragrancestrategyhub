@@ -181,57 +181,45 @@ function gestisciSblocchi() {
 
 // LOGICA OTTIMIZZATA PER HUGGING FACE
 async function generaRender() {
-    const nome = document.getElementById('input-nome-preventivo').value;
-    const s = state.selezioni;
-    document.getElementById('titolo-preventivo-dinamico').innerText = nome;
-    document.getElementById('tab-preventivo').style.display = 'block';
-    
-    // Layout del preventivo
-    const contenitore = document.getElementById('contenuto-preventivo');
-    contenitore.innerHTML = `
-        <div style="display: flex; gap: 40px; text-align: left; background: #f9f9f9; padding: 30px; border-radius: 15px;">
-            <div style="flex: 1; height: 500px; background: #fff; border: 1px solid #ddd; display: flex; align-items: center; justify-content: center; position: relative;">
-                <p id="status-ai">Generazione AI in corso...</p>
-                <img id="img-render-ai" style="display: none; max-width: 100%; max-height: 100%; object-fit: contain;">
-            </div>
-            <div style="width: 300px; color: #333;">
-                <h3 style="border-bottom: 2px solid #1b4b6b; padding-bottom: 10px;">Specifiche Progetto</h3>
-                <p style="margin-top:15px;"><b>Progetto:</b> ${nome}</p>
-                <p><b>Bottiglia:</b> ${s.bottiglia.Codice} (${s.bottiglia['Formato (ml)']}ml)</p>
-                <p><b>Forma:</b> ${s.bottiglia.Forma}</p>
-                <p><b>Tappo:</b> ${s.tappo.Codice}</p>
-                <p><b>Accessori:</b> Cache ${s.cache.Codice} + Pompa ${s.pompa.Codice}</p>
-                <button onclick="window.print()" class="blue-btn" style="width:100%; margin-top:30px;">Salva in PDF / Stampa</button>
-            </div>
-        </div>
-    `;
-
+    const nomeProgetto = document.getElementById('input-nome-preventivo').value || "Mio Progetto";
     cambiaPagina('preventivo-page');
+
+    document.getElementById('titolo-preventivo-dinamico').innerText = nomeProgetto;
+    const statusDiv = document.getElementById('status-ai');
+    const imgRender = document.getElementById('img-render-ai');
+
+    statusDiv.innerHTML = "L'AI sta creando il tuo flacone... <br><small>(Attendi circa 20 secondi)</small>";
+    if(imgRender) imgRender.style.display = "none";
+
+    const descBottiglia = state.selezioni.bottiglia ? state.selezioni.bottiglia.Forma : "luxury";
+    const descTappo = state.selezioni.tappo ? state.selezioni.tappo.Descrizione : "elegant cap";
+    
+    // Prompt pulito
+    const promptAI = `A professional studio photography of a luxury perfume bottle named '${nomeProgetto}', ${descBottiglia} glass shape, high-end ${descTappo}, elegant lighting, white background, 8k resolution`;
 
     try {
         const response = await fetch(MODEL_URL, {
             method: "POST",
             headers: { 
                 "Authorization": `Bearer ${HF_TOKEN.trim()}`
-                // Content-Type rimosso per superare il blocco CORS del browser
+                // NOTA: Non mettiamo "Content-Type" per evitare il blocco CORS Preflight
             },
-            body: JSON.stringify({ 
-                inputs: `A professional studio photography of a luxury perfume bottle, ${state.selezioni.bottiglia ? state.selezioni.bottiglia.Forma : 'elegant'} glass shape, high-end design, elegant lighting, white background, 8k resolution.`,
-                options: { wait_for_model: true }
-            }),
+            // Inviamo il prompt direttamente come stringa, non come JSON
+            body: JSON.stringify({ inputs: promptAI }) 
         });
 
-        if (!response.ok) throw new Error("Errore nel caricamento del modello AI");
+        if (!response.ok) throw new Error("Server occupato. Riprova.");
 
         const blob = await response.blob();
         const imageUrl = URL.createObjectURL(blob);
-        const imgEl = document.getElementById('img-render-ai');
-        imgEl.src = imageUrl;
-        imgEl.style.display = 'block';
-        document.getElementById('status-ai').style.display = 'none';
 
-    } catch (err) {
-        document.getElementById('status-ai').innerHTML = `<span style="color:red;">Failed to fetch</span><br><button onclick="generaRender()" style="margin-top:10px; cursor:pointer;">Riprova</button>`;
+        statusDiv.innerText = "Render completato!";
+        if(imgRender) {
+            imgRender.src = imageUrl;
+            imgRender.style.display = "block";
+        }
+    } catch (error) {
+        statusDiv.innerHTML = `<span style="color:red;">Errore: ${error.message}</span><br><button onclick="generaRender()">Riprova</button>`;
     }
 }
 
