@@ -21,32 +21,22 @@
 
         <section id="home" class="page-section active">
             <div class="hero-image-container">
-                <img src="assets/home-render.jpg" alt="Render Profumo" class="hero-bg" onerror="this.src='https://via.placeholder.com/1200x800?text=FRAGRANCE+STRATEGY+HUB'">
-                <h1 class="hero-title">FRAGRANCE STRATEGY HUB</h1>
+                <img src="assets/home-render.jpg" alt="Render Profumo" class="hero-bg" onerror="this.src='https://via.placeholder.com/1920x1080?text=Fragrance+Hub'">
+                <h1 class="hero-title">FRAGRANCE<br>STRATEGY HUB</h1>
             </div>
         </section>
 
         <section id="crea-profumo" class="page-section">
-            <div class="configurator-layout">
-                <div class="sidebar-componenti">
-                    <button class="comp-btn active" data-cat="bottiglia">BOTTIGLIA</button>
-                    <button class="comp-btn" data-cat="tappo" disabled>TAPPO</button>
-                    <button class="comp-btn" data-cat="cache" disabled>CACHE</button>
-                    <button class="comp-btn" data-cat="pompa" disabled>POMPA</button>
-                    <button class="comp-btn" data-cat="essenza" disabled>ESSENZA</button>
-                </div>
+            <div class="configuratore-container">
+                <aside class="sidebar-categorie" id="sidebar-categorie"></aside>
 
                 <div class="main-configurator">
-                    <div class="top-bar-container">
-                        <div class="top-filters" id="dynamic-filters"></div>
-                        <div style="display: flex; gap: 10px; align-items: center;">
-                            <button class="action-btn" onclick="resetConfiguratore()" style="background:#eee; border:1px solid #ccc; padding:8px 15px; border-radius:5px; cursor:pointer; font-weight:bold;">Reset</button>
-                            <input type="text" id="input-nome-preventivo" placeholder="Nome preventivo" maxlength="12" style="padding: 8px; border-radius: 5px; border: 1px solid #ccc;">
-                            <button id="btn-genera-render" class="action-btn blue-btn" onclick="generaRender()" disabled>Genera Render</button>
-                        </div>
+                    <div class="top-bar">
+                        <input type="text" id="input-nome-preventivo" placeholder="Nome del progetto..." class="project-input">
+                        <button id="btn-genera-render" class="btn-render" onclick="generaRender()">GENERA RENDER AI</button>
                     </div>
 
-                    <div class="cards-grid" id="items-grid"></div>
+                    <div class="grid-prodotti" id="grid-prodotti"></div>
 
                     <div class="bottom-dock-container">
                         <div class="dock-row packaging-dock">
@@ -68,20 +58,25 @@
             <div style="padding: 40px; text-align: center;"><h1>Progetto Y</h1></div>
         </section>
 
-        
-
         <section id="preventivo-page" class="page-section">
-    <div style="padding: 40px; text-align: center;">
-        <h1 id="titolo-preventivo-dinamico" style="text-transform: uppercase; letter-spacing: 2px;"></h1>
-        
-        <div id="status-ai" style="margin: 20px 0; font-weight: bold; color: #666;"></div>
-        <div id="render-container" style="margin-bottom: 30px;">
-            <img id="img-render-ai" src="" alt="Render AI" style="display:none; max-width:100%; border-radius:15px; box-shadow: 0 10px 30px rgba(0,0,0,0.2);">
-        </div>
-        
-        <div id="contenuto-preventivo"></div>
-    </div>
-</section>
+            <div style="padding: 40px; text-align: center;">
+                <h1 id="titolo-preventivo-dinamico" style="text-transform: uppercase; letter-spacing: 2px; margin-bottom: 20px;"></h1>
+                
+                <div id="status-ai" style="margin: 20px 0; font-weight: bold; color: #666;"></div>
+                
+                <div id="render-container" style="margin-bottom: 30px;">
+                    <img id="img-render-ai" src="" alt="Render AI" style="display:none; max-width:800px; width:100%; border-radius:15px; box-shadow: 0 10px 30px rgba(0,0,0,0.2); margin: 0 auto;">
+                </div>
+
+                <div id="contenuto-preventivo" style="text-align: left; max-width: 800px; margin: 0 auto; background: #f9f9f9; padding: 20px; border-radius: 10px;"></div>
+            </div>
+        </section>
+
+        <section id="fragranze-brand" class="page-section">
+            <div class="section-header">
+                <h2>Database Fragranze Brand</h2>
+                <div id="brand-container">Caricamento list_profumi.csv...</div>
+            </div>
         </section>
 
     </main>
