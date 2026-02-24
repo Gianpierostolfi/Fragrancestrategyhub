@@ -7,7 +7,7 @@ let state = {
 };
 
 // CONFIGURAZIONE AI
-const HF_TOKEN = "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";
+const HF_TOKEN = "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";
 const MODEL_URL = "https://api-inference.huggingface.co/models/stabilityai/stable-diffusion-xl-base-1.0";
 
 window.onload = async () => {
@@ -239,7 +239,10 @@ function cambiaPagina(id) {
     document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
     const target = document.getElementById(id);
     if(target) target.classList.add('active');
+
     document.querySelectorAll('.nav-tab').forEach(tab => {
-        if (tab.getAttribute('onclick') && tab.getAttribute('onclick').includes(id)) tab.classList.add('active');
+        if (tab.getAttribute('onclick').includes(`'${id}'`)) {
+            tab.classList.add('active');
+        }
     });
-}
+} // <--- CHIUSURA FINALE
