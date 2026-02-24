@@ -7,7 +7,7 @@ let state = {
 };
 
 // CONFIGURAZIONE AI
-const HF_TOKEN = "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";
+const HF_TOKEN = "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";
 const MODEL_URL = "https://api-inference.huggingface.co/models/stabilityai/stable-diffusion-xl-base-1.0";
 
 window.onload = async () => {
@@ -198,7 +198,7 @@ async function generaRender() {
             {
                 method: "POST",
                 headers: {
-                    "Authorization": "Bearer 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", // <--- INSERISCI IL TUO TOKEN QUI
+                    "Authorization": "Bearer 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", // <--- INSERISCI IL TUO TOKEN QUI
                     "Content-Type": "application/json",
                 },
                 body: JSON.stringify({ 
