@@ -178,31 +178,33 @@ function gestisciSblocchi() {
 
 // LOGICA OTTIMIZZATA PER HUGGING FACE
 async function generaRender() {
-    const nomeProgetto = document.getElementById("project-name")?.value || "Progetto Senza Nome";
-    const statusDiv = document.getElementById("status-render");
-    const container = document.getElementById("render-container");
+    const statusDiv = document.getElementById("status-ai") || document.getElementById("status-render");
+    const imgRender = document.getElementById("img-render-ai");
+    const nomeProgetto = document.getElementById('input-nome-preventivo')?.value || "Fragrance";
 
-    if (!statusDiv || !container) return;
+    if (!statusDiv) return;
 
-    statusDiv.innerHTML = "Generazione in corso... attendere circa 20-30 secondi.";
-    container.innerHTML = "";
+    // Reset interfaccia per caricamento
+    statusDiv.style.display = "block";
+    statusDiv.innerText = "Generazione render in corso (20-30 sec)...";
+    if (imgRender) imgRender.style.display = "none";
 
-    // Recupera le selezioni attuali (assicurati che queste variabili siano definite nel tuo script)
-    const promptAI = `A professional product photography of a luxury perfume bottle named '${nomeProgetto}', ${selectedBottiglia}, ${selectedTappo}, studio lighting, high resolution, 8k, elegant background`;
+    // Prompt ottimizzato per il modello XL
+    const promptAI = `Professional studio photography of a luxury perfume bottle named ${nomeProgetto}, elegant design, high resolution, 8k, cinematic lighting`;
 
     try {
         const response = await fetch(
             "https://api-inference.huggingface.co/models/stabilityai/stable-diffusion-xl-base-1.0",
             {
+                method: "POST",
                 headers: {
-                    "Authorization": "Bearer hf_TUO_TOKEN_QUI", // Sostituisci hf_... con il tuo vero token
+                    "Authorization": "Bearer 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", // <--- INSERISCI IL TUO TOKEN QUI
                     "Content-Type": "application/json",
                 },
-                method: "POST",
                 body: JSON.stringify({ 
                     inputs: promptAI,
                     parameters: {
-                        negative_prompt: "blurry, distorted, low quality, text, watermark",
+                        negative_prompt: "blurry, text, watermark, deformed",
                         guidance_scale: 7.5
                     }
                 }),
@@ -210,19 +212,25 @@ async function generaRender() {
         );
 
         if (!response.ok) {
-            const errorData = await response.json();
-            throw new Error(errorData.error || `Errore API: ${response.status}`);
+            const errorText = await response.text();
+            throw new Error(`Errore API (${response.status}): ${errorText}`);
         }
 
         const blob = await response.blob();
-        const imgUrl = URL.createObjectURL(blob);
+        const imageUrl = URL.createObjectURL(blob);
 
-        container.innerHTML = `<img src="${imgUrl}" alt="Render Profumo" style="max-width:100%; border-radius:10px; box-shadow: 0 4px 15px rgba(0,0,0,0.3);">`;
-        statusDiv.innerHTML = "Render generato con successo!";
+        // Visualizzazione del risultato finale
+        statusDiv.innerText = "Render completato!";
+        if (imgRender) {
+            imgRender.src = imageUrl;
+            imgRender.style.display = "block";
+            imgRender.style.maxWidth = "100%";
+            imgRender.style.borderRadius = "15px";
+        }
 
     } catch (error) {
-        console.error("Errore dettagliato:", error);
-        statusDiv.innerHTML = `<span style="color:red;">Errore: ${error.message}</span> <br> <button onclick="generaRender()">Riprova</button>`;
+        console.error("Errore Generazione:", error);
+        statusDiv.innerHTML = `<span style="color:red;">Errore: ${error.message}</span>`;
     }
 }
 
