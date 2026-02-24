@@ -178,57 +178,51 @@ function gestisciSblocchi() {
 
 // LOGICA OTTIMIZZATA PER HUGGING FACE
 async function generaRender() {
-    const nome = document.getElementById('input-nome-preventivo').value;
-    const s = state.selezioni;
-    document.getElementById('titolo-preventivo-dinamico').innerText = nome;
-    document.getElementById('tab-preventivo').style.display = 'block';
-    
-    // Layout del preventivo
-    const contenitore = document.getElementById('contenuto-preventivo');
-    contenitore.innerHTML = `
-        <div style="display: flex; gap: 40px; text-align: left; background: #f9f9f9; padding: 30px; border-radius: 15px;">
-            <div style="flex: 1; height: 500px; background: #fff; border: 1px solid #ddd; display: flex; align-items: center; justify-content: center; position: relative;">
-                <p id="status-ai">Generazione AI in corso...</p>
-                <img id="img-render-ai" style="display: none; max-width: 100%; max-height: 100%; object-fit: contain;">
-            </div>
-            <div style="width: 300px; color: #333;">
-                <h3 style="border-bottom: 2px solid #1b4b6b; padding-bottom: 10px;">Specifiche Progetto</h3>
-                <p style="margin-top:15px;"><b>Progetto:</b> ${nome}</p>
-                <p><b>Bottiglia:</b> ${s.bottiglia.Codice} (${s.bottiglia['Formato (ml)']}ml)</p>
-                <p><b>Forma:</b> ${s.bottiglia.Forma}</p>
-                <p><b>Tappo:</b> ${s.tappo.Codice}</p>
-                <p><b>Accessori:</b> Cache ${s.cache.Codice} + Pompa ${s.pompa.Codice}</p>
-                <button onclick="window.print()" class="blue-btn" style="width:100%; margin-top:30px;">Salva in PDF / Stampa</button>
-            </div>
-        </div>
-    `;
+    const nomeProgetto = document.getElementById("project-name")?.value || "Progetto Senza Nome";
+    const statusDiv = document.getElementById("status-render");
+    const container = document.getElementById("render-container");
 
-    cambiaPagina('preventivo-page');
+    if (!statusDiv || !container) return;
+
+    statusDiv.innerHTML = "Generazione in corso... attendere circa 20-30 secondi.";
+    container.innerHTML = "";
+
+    // Recupera le selezioni attuali (assicurati che queste variabili siano definite nel tuo script)
+    const promptAI = `A professional product photography of a luxury perfume bottle named '${nomeProgetto}', ${selectedBottiglia}, ${selectedTappo}, studio lighting, high resolution, 8k, elegant background`;
 
     try {
-        const response = await fetch(MODEL_URL, {
-            method: "POST",
-            headers: { 
-                "Authorization": `Bearer ${HF_TOKEN}`,
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify({ 
-                inputs: `A professional studio photography of a luxury perfume bottle, ${s.bottiglia.Forma} glass shape, high-end ${s.tappo.Descrizione}, elegant lighting, white background, 8k resolution.`,
-                options: { wait_for_model: true }
-            }),
-        });
+        const response = await fetch(
+            "https://api-inference.huggingface.co/models/stabilityai/stable-diffusion-xl-base-1.0",
+            {
+                headers: {
+                    "Authorization": "Bearer hf_TUO_TOKEN_QUI", // Sostituisci hf_... con il tuo vero token
+                    "Content-Type": "application/json",
+                },
+                method: "POST",
+                body: JSON.stringify({ 
+                    inputs: promptAI,
+                    parameters: {
+                        negative_prompt: "blurry, distorted, low quality, text, watermark",
+                        guidance_scale: 7.5
+                    }
+                }),
+            }
+        );
 
-        if (!response.ok) throw new Error("Errore nel caricamento del modello AI");
+        if (!response.ok) {
+            const errorData = await response.json();
+            throw new Error(errorData.error || `Errore API: ${response.status}`);
+        }
 
         const blob = await response.blob();
-        const imageUrl = URL.createObjectURL(blob);
-        const imgEl = document.getElementById('img-render-ai');
-        imgEl.src = imageUrl;
-        imgEl.style.display = 'block';
-        document.getElementById('status-ai').style.display = 'none';
+        const imgUrl = URL.createObjectURL(blob);
 
-    } catch (err) {
-        document.getElementById('status-ai').innerHTML = `<span style="color:red;">Failed to fetch</span><br><button onclick="generaRender()" style="margin-top:10px; cursor:pointer;">Riprova</button>`;
+        container.innerHTML = `<img src="${imgUrl}" alt="Render Profumo" style="max-width:100%; border-radius:10px; box-shadow: 0 4px 15px rgba(0,0,0,0.3);">`;
+        statusDiv.innerHTML = "Render generato con successo!";
+
+    } catch (error) {
+        console.error("Errore dettagliato:", error);
+        statusDiv.innerHTML = `<span style="color:red;">Errore: ${error.message}</span> <br> <button onclick="generaRender()">Riprova</button>`;
     }
 }
 
