@@ -48,3 +48,23 @@ body { font-family: 'Helvetica Neue', Arial, sans-serif; background-color: #ffff
     border-radius: 10px;
     box-shadow: 0 4px 15px rgba(0,0,0,0.05);
 }
+/* Modifica per mantenere il titolo dentro la card */
+.item-card h4 {
+    font-size: 13px;
+    margin-bottom: 8px;
+    line-height: 1.2;
+    
+    /* Forza il testo a stare dentro */
+    word-wrap: break-word;       /* Spezza le parole troppo lunghe */
+    overflow: hidden;            /* Nasconde ciò che esce */
+    display: -webkit-box;        /* Crea un contenitore flessibile */
+    -webkit-line-clamp: 2;       /* Numero massimo di righe visibili (es. 2) */
+    -webkit-box-orient: vertical;
+    min-height: 32px;            /* Mantiene l'allineamento costante tra le card */
+}
+
+/* Opzionale: aggiusta il padding della card per dare respiro al testo */
+.item-card {
+    padding: 12px;
+    overflow: hidden;            /* Impedisce a qualsiasi elemento di uscire */
+}

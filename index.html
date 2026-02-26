@@ -29,12 +29,12 @@
         <section id="crea-profumo" class="page-section">
             <div class="configurator-layout">
                 <div class="sidebar-componenti">
-                    <button class="comp-btn active" data-cat="bottiglia">BOTTIGLIA</button>
-                    <button class="comp-btn" data-cat="tappo" disabled>TAPPO</button>
-                    <button class="comp-btn" data-cat="cache" disabled>CACHE</button>
-                    <button class="comp-btn" data-cat="pompa" disabled>POMPA</button>
-                    <button class="comp-btn" data-cat="essenza" disabled>ESSENZA</button>
-                </div>
+    <button class="comp-btn active" data-cat="bottiglia" onclick="caricaCategoria('bottiglia')">BOTTIGLIA</button>
+    <button class="comp-btn" data-cat="tappo" onclick="caricaCategoria('tappo')" disabled>TAPPO</button>
+    <button class="comp-btn" data-cat="cache" onclick="caricaCategoria('cache')" disabled>CACHE</button>
+    <button class="comp-btn" data-cat="pompa" onclick="caricaCategoria('pompa')" disabled>POMPA</button>
+    <button class="comp-btn" id="btn-essenza" data-cat="essenza" onclick="mostraMenuEssenze()" disabled>ESSENZA</button>
+</div>
 
                 <div class="main-configurator">
                     <div class="top-bar-container">
