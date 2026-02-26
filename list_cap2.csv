@@ -1,34 +1,34 @@
-﻿Categoria;Linea;Modello;Finitura;colore;caratteristiche;peso gr.;Fea;Imboccatura;quantità;peso box kg;misure box cm;Codice;Descrizione;Costo Unitario (€)
-Pompa;1;13金电化铝喷头+中套;Alluminio;oro;standard;;13;Crimp;5000;;;Pompa_1_Alluminio_oro_13_standard;Pompa, 1, Alluminio, oro, standardFea 13, Crimp;0,2
-Cache;1;13金电化铝喷头+中套;Alluminio;oro;standard;;13;Crimp;10000;;;Cache_1_Alluminio_oro_13_standard;Cache, 1, Alluminio, oro, standardFea 13, Crimp;0,3
-Pompa;2;         15金电化铝+中套;Alluminio;oro;standard;;15;Crimp;5000;;;Pompa_2_Alluminio_oro_15_standard;Pompa, 2, Alluminio, oro, standardFea 15, Crimp;0,2
-Cache;2;         15金电化铝+中套;Alluminio;oro;standard;;15;Crimp;10000;;;Cache_2_Alluminio_oro_15_standard;Cache, 2, Alluminio, oro, standardFea 15, Crimp;0,3
-Pompa;3;15口113金电化铝喷头+中套（延时喷雾）;Alluminio;oro brillante;premium;;15;Crimp;5000;;;Pompa_3_Alluminio_oro brillante_15_premium;Pompa, 3, Alluminio, oro brillante, premiumFea 15, Crimp;0,2
-Cache;3;15口113金电化铝喷头+中套（延时喷雾）;Alluminio;oro brillante;premium;;15;Crimp;10000;;;Cache_3_Alluminio_oro brillante_15_premium;Cache, 3, Alluminio, oro brillante, premiumFea 15, Crimp;0,3
-Pompa;4;13银电化铝喷头+中套;Alluminio;argento;standard;;13;Crimp;5000;;;Pompa_4_Alluminio_argento_13_standard;Pompa, 4, Alluminio, argento, standardFea 13, Crimp;0,2
-Cache;4;13银电化铝喷头+中套;Alluminio;argento;standard;;13;Crimp;10000;;;Cache_4_Alluminio_argento_13_standard;Cache, 4, Alluminio, argento, standardFea 13, Crimp;0,3
-Pompa;5;13银电化铝喷头+中套;Alluminio;argento;standard;;15;Crimp;5000;;;Pompa_5_Alluminio_argento_15_standard;Pompa, 5, Alluminio, argento, standardFea 15, Crimp;0,2
-Cache;5;13银电化铝喷头+中套;Alluminio;argento;standard;;15;Crimp;10000;;;Cache_5_Alluminio_argento_15_standard;Cache, 5, Alluminio, argento, standardFea 15, Crimp;0,3
-Pompa;6;15口113银电化铝喷头+中套（延时喷雾）;Alluminio;argento;premium;;15;Crimp;5000;;;Pompa_6_Alluminio_argento_15_premium;Pompa, 6, Alluminio, argento, premiumFea 15, Crimp;0,2
-Cache;6;15口113银电化铝喷头+中套（延时喷雾）;Alluminio;argento;premium;;15;Crimp;10000;;;Cache_6_Alluminio_argento_15_premium;Cache, 6, Alluminio, argento, premiumFea 15, Crimp;0,3
-Pompa;7;13黑电化铝喷头+中套;Alluminio;nero;standard;;13;Crimp;5000;;;Pompa_7_Alluminio_nero_13_standard;Pompa, 7, Alluminio, nero, standardFea 13, Crimp;0,2
-Cache;7;13黑电化铝喷头+中套;Alluminio;nero;standard;;13;Crimp;10000;;;Cache_7_Alluminio_nero_13_standard;Cache, 7, Alluminio, nero, standardFea 13, Crimp;0,3
-Pompa;8;         15黑电化铝+中套;Alluminio;nero;standard;;15;Crimp;5000;;;Pompa_8_Alluminio_nero_15_standard;Pompa, 8, Alluminio, nero, standardFea 15, Crimp;0,2
-Cache;8;         15黑电化铝+中套;Alluminio;nero;standard;;15;Crimp;10000;;;Cache_8_Alluminio_nero_15_standard;Cache, 8, Alluminio, nero, standardFea 15, Crimp;0,3
-Pompa;9;15口113黑电化铝喷头+中套（延时喷雾）;Alluminio;nero;premium;;15;Crimp;5000;;;Pompa_9_Alluminio_nero_15_premium;Pompa, 9, Alluminio, nero, premiumFea 15, Crimp;0,2
-Cache;9;15口113黑电化铝喷头+中套（延时喷雾）;Alluminio;nero;premium;;15;Crimp;10000;;;Cache_9_Alluminio_nero_15_premium;Cache, 9, Alluminio, nero, premiumFea 15, Crimp;0,3
-Tappo;1;13口亮黑亚克力;Plexiglas;nero;lucido;8;13;Crimp;1728;14.7 ;40*30*33;Tappo_1_Plexiglas_nero_13_lucido;Tappo, 1, Plexiglas, nero, lucidoFea 13, Crimp;0,2
-Tappo;1;13口哑黑亚克力;Plexiglas;nero;opaco;8;13;Crimp;1728;14.7 ;40*30*33;Tappo_1_Plexiglas_nero_13_opaco;Tappo, 1, Plexiglas, nero, opacoFea 13, Crimp;0,3
-Tappo;1;15口亮黑亚克力;Plexiglas;nero;lucido;13,5;15;Crimp;1000;15;40*30*34;Tappo_1_Plexiglas_nero_15_lucido;Tappo, 1, Plexiglas, nero, lucidoFea 15, Crimp;0,4
-Tappo;1;15口亮黑亚克力;Plexiglas;nero;opaco;13,5;15;Crimp;1000;15;40*30*34;Tappo_1_Plexiglas_nero_15_opaco;Tappo, 1, Plexiglas, nero, opacoFea 15, Crimp;0,5
-Tappo;2;         13口透明亚克力;Plexiglas;trasparente;lucido;7,5;13;Crimp;1728;14.7 ;40*29*33;Tappo_2_Plexiglas_trasparente_13_lucido;Tappo, 2, Plexiglas, trasparente, lucidoFea 13, Crimp;0,6
-Tappo;2;         13口磨砂亚克力;Plexiglas;trasparente;smerigliato;7,5;13;Crimp;1728;16;40*30*33;Tappo_2_Plexiglas_trasparente_13_smerigliato;Tappo, 2, Plexiglas, trasparente, smerigliatoFea 13, Crimp;0,2
-Tappo;2;        15口透明亚克力;Plexiglas;trasparente;lucido;14;15;Crimp;1000;14.6 ;40*30*32;Tappo_2_Plexiglas_trasparente_15_lucido;Tappo, 2, Plexiglas, trasparente, lucidoFea 15, Crimp;0,2
-Tappo;2;         15口磨砂亚克力;Plexiglas;trasparente;smerigliato;7,5;15;Crimp;1716;14;44*30*32;Tappo_2_Plexiglas_trasparente_15_smerigliato;Tappo, 2, Plexiglas, trasparente, smerigliatoFea 15, Crimp;0,3
-Tappo;3;15口50银亚克力;Plexiglas;argento;metallizzato;;15;Crimp;1200;10.7 ;40*29*33;Tappo_3_Plexiglas_argento_15_metallizzato;Tappo, 3, Plexiglas, argento, metallizzatoFea 15, Crimp;0,4
-Tappo;3;15口100金亚克力;Plexiglas;oro;metallizzato;13,5;15;Crimp;1000;14;40*29*33;Tappo_3_Plexiglas_oro_15_metallizzato;Tappo, 3, Plexiglas, oro, metallizzatoFea 15, Crimp;0,5
-Tappo;3;15口玻璃盖;vetro;trasparente;lucido;39;15;Crimp;320;12.5 ;40*33*12;Tappo_3_vetro_trasparente_15_lucido;Tappo, 3, vetro, trasparente, lucidoFea 15, Crimp;0,2
-Tappo;3;15口磨砂玻璃盖;vetro;trasparente;smerigliato;39;15;Crimp;320;12.5 ;40*33*12;Tappo_3_vetro_trasparente_15_smerigliato;Tappo, 3, vetro, trasparente, smerigliatoFea 15, Crimp;0,3
-Tappo;4;15口蓝风铃金;plastica;oro;lucido;8.5 ;15;Crimp;1250;12;40*30*32;Tappo_4_plastica_oro_15_lucido;Tappo, 4, plastica, oro, lucidoFea 15, Crimp;0,4
-Tappo;4;15口蓝风铃银;plastica;argento;lucido;8.5 ;15;Crimp;1250;12;40*30*32;Tappo_4_plastica_argento_15_lucido;Tappo, 4, plastica, argento, lucidoFea 15, Crimp;0,5
-Tappo;4;15口蓝风铃黑;plastica;nero;lucido;8.5 ;15;Crimp;1380;12.1 ;40*29*33;Tappo_4_plastica_nero_15_lucido;Tappo, 4, plastica, nero, lucidoFea 15, Crimp;0,6
+﻿Categoria;Linea;Modello;Finitura;colore;caratteristiche;peso gr.;Fea;Imboccatura;quantità;peso box kg;misure box cm;Codice;Descrizione;render;Costo Unitario (€)
+Pompa;1;13金电化铝喷头+中套;Alluminio;oro;standard;;13;Crimp;5000;;;Pompa_1_Alluminio_oro_13_standard;Pompa, 1, Alluminio, oro, standardFea 13, Crimp;Pompa_1_Alluminio_oro_13_standard_render;0,2
+Cache;1;13金电化铝喷头+中套;Alluminio;oro;standard;;13;Crimp;10000;;;Cache_1_Alluminio_oro_13_standard;Cache, 1, Alluminio, oro, standardFea 13, Crimp;Cache_1_Alluminio_oro_13_standard_render;0,3
+Pompa;2;         15金电化铝+中套;Alluminio;oro;standard;;15;Crimp;5000;;;Pompa_2_Alluminio_oro_15_standard;Pompa, 2, Alluminio, oro, standardFea 15, Crimp;Pompa_2_Alluminio_oro_15_standard_render;0,2
+Cache;2;         15金电化铝+中套;Alluminio;oro;standard;;15;Crimp;10000;;;Cache_2_Alluminio_oro_15_standard;Cache, 2, Alluminio, oro, standardFea 15, Crimp;Cache_2_Alluminio_oro_15_standard_render;0,3
+Pompa;3;15口113金电化铝喷头+中套（延时喷雾）;Alluminio;oro brillante;premium;;15;Crimp;5000;;;Pompa_3_Alluminio_oro brillante_15_premium;Pompa, 3, Alluminio, oro brillante, premiumFea 15, Crimp;Pompa_3_Alluminio_oro brillante_15_premium_render;0,2
+Cache;3;15口113金电化铝喷头+中套（延时喷雾）;Alluminio;oro brillante;premium;;15;Crimp;10000;;;Cache_3_Alluminio_oro brillante_15_premium;Cache, 3, Alluminio, oro brillante, premiumFea 15, Crimp;Cache_3_Alluminio_oro brillante_15_premium_render;0,3
+Pompa;4;13银电化铝喷头+中套;Alluminio;argento;standard;;13;Crimp;5000;;;Pompa_4_Alluminio_argento_13_standard;Pompa, 4, Alluminio, argento, standardFea 13, Crimp;Pompa_4_Alluminio_argento_13_standard_render;0,2
+Cache;4;13银电化铝喷头+中套;Alluminio;argento;standard;;13;Crimp;10000;;;Cache_4_Alluminio_argento_13_standard;Cache, 4, Alluminio, argento, standardFea 13, Crimp;Cache_4_Alluminio_argento_13_standard_render;0,3
+Pompa;5;13银电化铝喷头+中套;Alluminio;argento;standard;;15;Crimp;5000;;;Pompa_5_Alluminio_argento_15_standard;Pompa, 5, Alluminio, argento, standardFea 15, Crimp;Pompa_5_Alluminio_argento_15_standard_render;0,2
+Cache;5;13银电化铝喷头+中套;Alluminio;argento;standard;;15;Crimp;10000;;;Cache_5_Alluminio_argento_15_standard;Cache, 5, Alluminio, argento, standardFea 15, Crimp;Cache_5_Alluminio_argento_15_standard_render;0,3
+Pompa;6;15口113银电化铝喷头+中套（延时喷雾）;Alluminio;argento;premium;;15;Crimp;5000;;;Pompa_6_Alluminio_argento_15_premium;Pompa, 6, Alluminio, argento, premiumFea 15, Crimp;Pompa_6_Alluminio_argento_15_premium_render;0,2
+Cache;6;15口113银电化铝喷头+中套（延时喷雾）;Alluminio;argento;premium;;15;Crimp;10000;;;Cache_6_Alluminio_argento_15_premium;Cache, 6, Alluminio, argento, premiumFea 15, Crimp;Cache_6_Alluminio_argento_15_premium_render;0,3
+Pompa;7;13黑电化铝喷头+中套;Alluminio;nero;standard;;13;Crimp;5000;;;Pompa_7_Alluminio_nero_13_standard;Pompa, 7, Alluminio, nero, standardFea 13, Crimp;Pompa_7_Alluminio_nero_13_standard_render;0,2
+Cache;7;13黑电化铝喷头+中套;Alluminio;nero;standard;;13;Crimp;10000;;;Cache_7_Alluminio_nero_13_standard;Cache, 7, Alluminio, nero, standardFea 13, Crimp;Cache_7_Alluminio_nero_13_standard_render;0,3
+Pompa;8;         15黑电化铝+中套;Alluminio;nero;standard;;15;Crimp;5000;;;Pompa_8_Alluminio_nero_15_standard;Pompa, 8, Alluminio, nero, standardFea 15, Crimp;Pompa_8_Alluminio_nero_15_standard_render;0,2
+Cache;8;         15黑电化铝+中套;Alluminio;nero;standard;;15;Crimp;10000;;;Cache_8_Alluminio_nero_15_standard;Cache, 8, Alluminio, nero, standardFea 15, Crimp;Cache_8_Alluminio_nero_15_standard_render;0,3
+Pompa;9;15口113黑电化铝喷头+中套（延时喷雾）;Alluminio;nero;premium;;15;Crimp;5000;;;Pompa_9_Alluminio_nero_15_premium;Pompa, 9, Alluminio, nero, premiumFea 15, Crimp;Pompa_9_Alluminio_nero_15_premium_render;0,2
+Cache;9;15口113黑电化铝喷头+中套（延时喷雾）;Alluminio;nero;premium;;15;Crimp;10000;;;Cache_9_Alluminio_nero_15_premium;Cache, 9, Alluminio, nero, premiumFea 15, Crimp;Cache_9_Alluminio_nero_15_premium_render;0,3
+Tappo;1;13口亮黑亚克力;Plexiglas;nero;lucido;8;13;Crimp;1728;14.7 ;40*30*33;Tappo_1_Plexiglas_nero_13_lucido;Tappo, 1, Plexiglas, nero, lucidoFea 13, Crimp;Tappo_1_Plexiglas_nero_13_lucido_render;0,2
+Tappo;1;13口哑黑亚克力;Plexiglas;nero;opaco;8;13;Crimp;1728;14.7 ;40*30*33;Tappo_1_Plexiglas_nero_13_opaco;Tappo, 1, Plexiglas, nero, opacoFea 13, Crimp;Tappo_1_Plexiglas_nero_13_opaco_render;0,3
+Tappo;1;15口亮黑亚克力;Plexiglas;nero;lucido;13,5;15;Crimp;1000;15;40*30*34;Tappo_1_Plexiglas_nero_15_lucido;Tappo, 1, Plexiglas, nero, lucidoFea 15, Crimp;Tappo_1_Plexiglas_nero_15_lucido_render;0,4
+Tappo;1;15口亮黑亚克力;Plexiglas;nero;opaco;13,5;15;Crimp;1000;15;40*30*34;Tappo_1_Plexiglas_nero_15_opaco;Tappo, 1, Plexiglas, nero, opacoFea 15, Crimp;Tappo_1_Plexiglas_nero_15_opaco_render;0,5
+Tappo;2;         13口透明亚克力;Plexiglas;trasparente;lucido;7,5;13;Crimp;1728;14.7 ;40*29*33;Tappo_2_Plexiglas_trasparente_13_lucido;Tappo, 2, Plexiglas, trasparente, lucidoFea 13, Crimp;Tappo_2_Plexiglas_trasparente_13_lucido_render;0,6
+Tappo;2;         13口磨砂亚克力;Plexiglas;trasparente;smerigliato;7,5;13;Crimp;1728;16;40*30*33;Tappo_2_Plexiglas_trasparente_13_smerigliato;Tappo, 2, Plexiglas, trasparente, smerigliatoFea 13, Crimp;Tappo_2_Plexiglas_trasparente_13_smerigliato_render;0,2
+Tappo;2;        15口透明亚克力;Plexiglas;trasparente;lucido;14;15;Crimp;1000;14.6 ;40*30*32;Tappo_2_Plexiglas_trasparente_15_lucido;Tappo, 2, Plexiglas, trasparente, lucidoFea 15, Crimp;Tappo_2_Plexiglas_trasparente_15_lucido_render;0,2
+Tappo;2;         15口磨砂亚克力;Plexiglas;trasparente;smerigliato;7,5;15;Crimp;1716;14;44*30*32;Tappo_2_Plexiglas_trasparente_15_smerigliato;Tappo, 2, Plexiglas, trasparente, smerigliatoFea 15, Crimp;Tappo_2_Plexiglas_trasparente_15_smerigliato_render;0,3
+Tappo;3;15口50银亚克力;Plexiglas;argento;metallizzato;;15;Crimp;1200;10.7 ;40*29*33;Tappo_3_Plexiglas_argento_15_metallizzato;Tappo, 3, Plexiglas, argento, metallizzatoFea 15, Crimp;Tappo_3_Plexiglas_argento_15_metallizzato_render;0,4
+Tappo;3;15口100金亚克力;Plexiglas;oro;metallizzato;13,5;15;Crimp;1000;14;40*29*33;Tappo_3_Plexiglas_oro_15_metallizzato;Tappo, 3, Plexiglas, oro, metallizzatoFea 15, Crimp;Tappo_3_Plexiglas_oro_15_metallizzato_render;0,5
+Tappo;3;15口玻璃盖;vetro;trasparente;lucido;39;15;Crimp;320;12.5 ;40*33*12;Tappo_3_vetro_trasparente_15_lucido;Tappo, 3, vetro, trasparente, lucidoFea 15, Crimp;Tappo_3_vetro_trasparente_15_lucido_render;0,2
+Tappo;3;15口磨砂玻璃盖;vetro;trasparente;smerigliato;39;15;Crimp;320;12.5 ;40*33*12;Tappo_3_vetro_trasparente_15_smerigliato;Tappo, 3, vetro, trasparente, smerigliatoFea 15, Crimp;Tappo_3_vetro_trasparente_15_smerigliato_render;0,3
+Tappo;4;15口蓝风铃金;plastica;oro;lucido;8.5 ;15;Crimp;1250;12;40*30*32;Tappo_4_plastica_oro_15_lucido;Tappo, 4, plastica, oro, lucidoFea 15, Crimp;Tappo_4_plastica_oro_15_lucido_render;0,4
+Tappo;4;15口蓝风铃银;plastica;argento;lucido;8.5 ;15;Crimp;1250;12;40*30*32;Tappo_4_plastica_argento_15_lucido;Tappo, 4, plastica, argento, lucidoFea 15, Crimp;Tappo_4_plastica_argento_15_lucido_render;0,5
+Tappo;4;15口蓝风铃黑;plastica;nero;lucido;8.5 ;15;Crimp;1380;12.1 ;40*29*33;Tappo_4_plastica_nero_15_lucido;Tappo, 4, plastica, nero, lucidoFea 15, Crimp;Tappo_4_plastica_nero_15_lucido_render;0,6
