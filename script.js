@@ -102,7 +102,6 @@ function renderGrid() {
         dati.forEach(item => {
             const card = document.createElement('div');
             card.className = 'item-card';
-            // Descrizione card invariata come da script originale
             card.innerHTML = `<img src="assets/${item.Codice}.png" onerror="this.src='https://via.placeholder.com/150?text=No+Image'"><h4>${item.Codice}</h4><p>${item.Descrizione}</p>`;
             card.onclick = () => seleziona(item);
             container.appendChild(card);
@@ -149,7 +148,6 @@ function aggiornaMiniature() {
                         <img src="assets/${sel.Codice}.png">
                         <p><b>${cat.toUpperCase()}</b><br>${sel.Codice}</p>`;
             
-            // Se è la bottiglia, aggiungo il formato SOTTO la miniatura
             if (cat === 'bottiglia') {
                 html += `<span class="ml-info">${sel['Formato (ml)']} ml</span>`;
             }
@@ -166,45 +164,14 @@ function rimuovi(cat) {
     aggiornaMiniature(); gestisciSblocchi(); caricaCategoria(cat);
 }
 
-function gestisciSblocchi() {
-    const nomePrev = document.getElementById('input-nome-preventivo').value.trim();
-    const sel = state.selezioni;
-    
-    // 1. Sblocco PACKAGING: se hai scelto la bottiglia, accendi Tappo, Cache e Pompa
-    const btnTappo = document.querySelector('button[data-cat="tappo"]');
-    const btnCache = document.querySelector('button[data-cat="cache"]');
-    const btnPompa = document.querySelector('button[data-cat="pompa"]');
-
-    if (sel.bottiglia) {
-        if (btnTappo) btnTappo.disabled = false;
-        if (btnCache) btnCache.disabled = false;
-        if (btnPompa) btnPompa.disabled = false;
-    }
-
-    // 2. Sblocco FUNZIONI FINALI: se hai scritto il nome, accendi Essenza e Render
-    const btnEssenza = document.getElementById('btn-essenza');
-    const btnRender = document.querySelector('button[onclick="generaRender()"]');
-
-    if (nomePrev !== "") {
-        if (btnEssenza) btnEssenza.disabled = false;
-        if (btnRender) btnRender.disabled = false;
-    } else {
-        if (btnEssenza) btnEssenza.disabled = true;
-        if (btnRender) btnRender.disabled = true;
-    }
-}
-
 function generaRender() {
     const nome = document.getElementById('input-nome-preventivo').value;
     document.getElementById('titolo-preventivo-dinamico').innerText = nome;
     
     const contenitore = document.getElementById('contenuto-preventivo');
     
-    // Procedura ottimizzata: legge direttamente dalla nuova colonna "render" del CSV
     const getRenderPath = (item) => {
         if (!item || !item.render) return null;
-        // Prende il valore della colonna render e aggiunge l'estensione .png
-        // (Assicurati che i file nella cartella assets si chiamino esattamente come scritto nel CSV)
         return `assets/${item.render}.png`;
     };
 
@@ -215,12 +182,14 @@ function generaRender() {
         <div class="preventivo-layout" style="display: flex; gap: 40px; margin-top: 40px; align-items: start; text-align: left;">
             
             <div id="render-final-container" style="flex: 1; min-height: 500px; background: radial-gradient(circle, #ffffff 0%, #f2f2f2 100%); border: 1px solid #eee; display: flex; align-items: center; justify-content: center; position: relative; border-radius: 10px; overflow: hidden;">
-                ${imgBottiglia ? `<img src="${imgBottiglia}" style="position: absolute; width: 85%; height: 85%; object-fit: contain; z-index: 1;">` : ''}
-                ${imgTappo ? `<img src="${imgTappo}" style="position: absolute; width: 85%; height: 85%; object-fit: contain; z-index: 2;">` : ''}
+                ${imgBottiglia ? `<img id="img-render-bottiglia" src="${imgBottiglia}" style="position: absolute; width: 85%; height: 85%; object-fit: contain; z-index: 1;">` : ''}
+                ${imgTappo ? `<img id="img-render-tappo" src="${imgTappo}" style="position: absolute; width: 85%; height: 85%; object-fit: contain; z-index: 2;">` : ''}
                 ${(!imgBottiglia && !imgTappo) ? '<span style="color: #999;">Immagini render non configurate nel CSV</span>' : ''}
             </div>
 
             <div class="preventivo-tecnico" style="flex: 1;">
+                <button onclick="window.print()" style="float:right; background:#d9534f; color:white; border:none; padding:5px 12px; border-radius:4px; cursor:pointer; font-weight:bold; font-size:12px;">SALVA PDF</button>
+
                 <h3 style="margin-bottom: 15px; border-bottom: 1px solid #333; padding-bottom: 5px; font-size: 16px; text-transform: uppercase;">Specifiche Tecniche</h3>
                 <table style="width: 100%; border-collapse: collapse; font-family: sans-serif; font-size: 13px;">
                     <thead>
@@ -240,6 +209,29 @@ function generaRender() {
                         </tr>
                     </tbody>
                 </table>
+
+                <div class="color-picker-panel">
+                    <label style="display:block; font-weight:bold; margin-bottom:10px; font-size:12px;">COLORAZIONE COMPONENTI:</label>
+                    <div class="target-selector">
+                        <button class="target-btn active" onclick="setTarget('bottiglia', this)">Bottiglia</button>
+                        <button class="target-btn" onclick="setTarget('tappo', this)">Tappo</button>
+                        <button class="target-btn" onclick="setTarget('entrambi', this)">Entrambi</button>
+                    </div>
+                    <div class="palette-grid">
+                        <div class="color-dot" style="background:transparent; border:1px solid #ccc;" onclick="applyColor('transparent', this)"></div>
+                        <div class="color-dot" style="background:#FFD700;" onclick="applyColor('#FFD700', this)"></div>
+                        <div class="color-dot" style="background:#C0C0C0;" onclick="applyColor('#C0C0C0', this)"></div>
+                        <div class="color-dot" style="background:#B87333;" onclick="applyColor('#B87333', this)"></div>
+                        <div class="color-dot" style="background:#000000;" onclick="applyColor('#000000', this)"></div>
+                        <div class="color-dot" style="background:#FF0000;" onclick="applyColor('#FF0000', this)"></div>
+                        <div class="color-dot" style="background:#0000FF;" onclick="applyColor('#0000FF', this)"></div>
+                        <div class="color-dot" style="background:#008000;" onclick="applyColor('#008000', this)"></div>
+                        <div class="color-dot" style="background:#FFC0CB;" onclick="applyColor('#FFC0CB', this)"></div>
+                        <div class="color-dot" style="background:#800080;" onclick="applyColor('#800080', this)"></div>
+                    </div>
+                    <label style="display:block; font-size:11px; margin-bottom:5px; font-weight:bold;">INTENSITÀ COLORE (SLIDER):</label>
+                    <input type="range" class="intensity-slider" min="0" max="1" step="0.1" value="0.5" oninput="updateIntensity(this.value)">
+                </div>
 
                 <div style="margin-top: 25px;">
                     <label style="display: block; font-weight: bold; margin-bottom: 8px; font-size: 14px;">NOTE E SPECIFICHE TECNICHE:</label>
@@ -267,58 +259,47 @@ function resetConfiguratore() {
 }
 
 function cambiaPagina(id) {
-    // 1. Nasconde tutte le sezioni
     document.querySelectorAll('.page-section').forEach(p => p.classList.remove('active'));
-    
-    // 2. Rimuove lo stato "attivo" da tutti i bottoni del menu
     document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
     
-    // 3. Mostra la sezione richiesta
     const target = document.getElementById(id);
     if (target) {
         target.classList.add('active');
     }
     
-    // 4. Attiva il bottone del menu corrispondente
-    // Cerchiamo il bottone che ha l'attributo onclick contenente l'id della pagina
     document.querySelectorAll('.nav-tab').forEach(tab => {
         if (tab.getAttribute('onclick') && tab.getAttribute('onclick').includes(id)) {
             tab.classList.add('active');
         }
     });
 
-    // 5. Gestione speciale per la tab preventivo
     const tabPrev = document.getElementById('tab-preventivo');
     if (id === 'preventivo-page' && tabPrev) {
         tabPrev.style.display = 'block';
         tabPrev.classList.add('active');
     }
 }
-// Funzione che sblocca i pulsanti solo tramite il nome preventivo
+
 function gestisciSblocchi() {
     const nomePrev = document.getElementById('input-nome-preventivo').value.trim();
     const sel = state.selezioni;
     
-    // Riferimenti ai pulsanti della sidebar
     const btnTappo = document.querySelector('button[onclick*="tappo"]');
     const btnCache = document.querySelector('button[onclick*="cache"]');
     const btnPompa = document.querySelector('button[onclick*="pompa"]');
     const btnEssenza = document.getElementById('btn-essenza');
     const btnRender = document.querySelector('button[onclick="generaRender()"]');
 
-    // --- LOGICA 1: SBLOCCO PACKAGING (Basato sulla scelta della Bottiglia) ---
     if (sel.bottiglia) {
         if (btnTappo) btnTappo.disabled = false;
         if (btnCache) btnCache.disabled = false;
         if (btnPompa) btnPompa.disabled = false;
     } else {
-        // Se deselezioni la bottiglia, questi tornano bloccati
         if (btnTappo) btnTappo.disabled = true;
         if (btnCache) btnCache.disabled = true;
         if (btnPompa) btnPompa.disabled = true;
     }
 
-    // --- LOGICA 2: SBLOCCO ESSENZA E RENDER (Basato sul Nome Preventivo) ---
     if (nomePrev !== "") {
         if (btnEssenza) btnEssenza.disabled = false;
         if (btnRender) btnRender.disabled = false;
@@ -328,11 +309,8 @@ function gestisciSblocchi() {
     }
 }
 
-// Funzione che crea il primo menu (Famiglie)
 function mostraMenuEssenze() {
     const btnEssenza = document.getElementById('btn-essenza');
-    
-    // Rimuove il menu se è già aperto (fuziona da interruttore)
     const vecchioMenu = document.getElementById('container-dropdown-essenze');
     if (vecchioMenu) {
         vecchioMenu.remove();
@@ -343,7 +321,6 @@ function mostraMenuEssenze() {
     container.id = 'container-dropdown-essenze';
     container.style.cssText = 'padding:10px; background:#f4f4f4; border-radius:5px; margin-top:5px; border:1px solid #ccc;';
 
-    // Estrae i nomi unici dalla colonna "famiglia olfattiva"
     const famiglie = [...new Set(db.essenze.map(item => item['famiglia olfattiva']))].filter(f => f);
     
     container.innerHTML = `
@@ -359,7 +336,6 @@ function mostraMenuEssenze() {
     btnEssenza.after(container);
 }
 
-// Funzione che crea il secondo menu (Sottofamiglie) filtrato
 function aggiornaSottofamiglie() {
     const famigliaScelta = document.getElementById('select-famiglia').value;
     const selectSotto = document.getElementById('select-sottofamiglia');
@@ -369,7 +345,6 @@ function aggiornaSottofamiglie() {
         return;
     }
 
-    // Filtra le righe del CSV in base alla famiglia scelta e prende le Sottofamiglie
     const sottofamiglie = [...new Set(db.essenze
         .filter(item => item['famiglia olfattiva'] === famigliaScelta)
         .map(item => item.Sottofamiglia))].filter(s => s);
@@ -380,12 +355,9 @@ function aggiornaSottofamiglie() {
     selectSotto.style.display = 'block';
 }
 
-// Funzione che scrive il risultato nel notes-container
 function mostraSceltaEssenza() {
     const sotto = document.getElementById('select-sottofamiglia').value;
     const notesContainer = document.getElementById('notes-container');
-    
-    // SALVATAGGIO FONDAMENTALE: comunica al sistema la scelta per il preventivo
     state.selezioni.sottofamiglia = sotto; 
 
     if (sotto && notesContainer) {
@@ -394,4 +366,75 @@ function mostraSceltaEssenza() {
                 <strong>Sottofamiglia selezionata:</strong> ${sotto}
             </div>`;
     }
+}
+
+// --- LOGICA DI COLORAZIONE RENDER AGGIORNATA ---
+let colorState = {
+    target: 'bottiglia',
+    color: 'transparent',
+    opacity: 0.5
+};
+
+function setTarget(target, btn) {
+    colorState.target = target;
+    document.querySelectorAll('.target-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+}
+
+function applyColor(hex, dot) {
+    colorState.color = hex;
+    document.querySelectorAll('.color-dot').forEach(d => d.classList.remove('active'));
+    if(dot) dot.classList.add('active');
+    
+    setTimeout(() => {
+        updateRenderFilters();
+    }, 50);
+}
+
+function updateIntensity(val) {
+    colorState.opacity = val;
+    updateRenderFilters();
+}
+
+function updateRenderFilters() {
+    const imgBot = document.getElementById('img-render-bottiglia');
+    const imgTap = document.getElementById('img-render-tappo');
+    
+    if (colorState.color === 'transparent') {
+        if (imgBot) {
+            imgBot.style.filter = 'none';
+            imgBot.style.mixBlendMode = 'normal';
+        }
+        if (imgTap) {
+            imgTap.style.filter = 'none';
+            imgTap.style.mixBlendMode = 'normal';
+        }
+        return;
+    }
+
+    const rgba = hexToRgba(colorState.color, colorState.opacity);
+
+    // Filtro per l'effetto vetro: drop-shadow per la tinta + contrasto per far risaltare i riflessi
+    const glassFilter = `drop-shadow(0 0 0 ${rgba}) contrast(1.2) brightness(1.1)`;
+
+    if (colorState.target === 'bottiglia' || colorState.target === 'entrambi') {
+        if (imgBot) {
+            imgBot.style.filter = glassFilter;
+            // 'multiply' o 'hue' sono i migliori per l'effetto vetro colorato
+            imgBot.style.mixBlendMode = 'multiply'; 
+        }
+    }
+    if (colorState.target === 'tappo' || colorState.target === 'entrambi') {
+        if (imgTap) {
+            imgTap.style.filter = glassFilter;
+            imgTap.style.mixBlendMode = 'multiply';
+        }
+    }
+}
+
+function hexToRgba(hex, alpha) {
+    let r = parseInt(hex.slice(1, 3), 16),
+        g = parseInt(hex.slice(3, 5), 16),
+        b = parseInt(hex.slice(5, 7), 16);
+    return `rgba(${r}, ${g}, ${b}, ${alpha})`;
 }
