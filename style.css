@@ -1,129 +1,208 @@
 * { box-sizing: border-box; margin: 0; padding: 0; }
 body { font-family: 'Helvetica Neue', Arial, sans-serif; background-color: #ffffff; color: #333; overflow: hidden; }
+
 #main-nav { display: flex; justify-content: center; background-color: #1a1a1a; padding: 10px; height: 60px; }
 .nav-tab { background: transparent; color: #999; border: none; padding: 10px 25px; font-size: 14px; font-weight: bold; text-transform: uppercase; cursor: pointer; border-bottom: 2px solid transparent; }
 .nav-tab.active { color: #fff; border-bottom: 2px solid #92bce3; }
+
 .page-section { display: none; height: calc(100vh - 60px); overflow-y: auto; }
 .page-section.active { display: block; }
+
 .hero-image-container { position: relative; width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; background: #000; }
 .hero-bg { width: 100%; height: 100%; object-fit: cover; opacity: 0.6; }
 .hero-title { position: absolute; color: #fff; font-size: 4rem; letter-spacing: 8px; text-align: center; font-weight: 900; }
+
 .configurator-layout { display: flex; height: 100%; }
 .sidebar-componenti { width: 180px; background: #fff; border-right: 1px solid #ddd; display: flex; flex-direction: column; padding-top: 20px; }
 .comp-btn { padding: 20px; text-align: left; background: #fff; border: none; border-bottom: 1px solid #eee; font-weight: bold; cursor: pointer; }
 .comp-btn.active { background: #f0f7ff; color: #1b4b6b; border-left: 5px solid #1b4b6b; }
 .comp-btn:disabled { color: #ccc; cursor: not-allowed; }
+
 .main-configurator { flex: 1; display: flex; flex-direction: column; background: #f9f9f9; overflow: hidden; }
 .top-bar-container { background: #fff; padding: 15px 25px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #ddd; }
 .top-filters { display: flex; gap: 15px; }
+
 .blue-btn { background-color: #92bce3; color: #1a1a1a; border: 1px solid #7aaedc; border-radius: 5px; padding: 8px 20px; font-weight: bold; cursor: pointer; }
 .blue-btn:disabled { background-color: #e0e0e0; border-color: #ccc; color: #aaa; cursor: not-allowed; }
+
 .cards-grid { flex: 1; padding: 25px; display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); grid-auto-rows: min-content; gap: 20px; overflow-y: auto; }
 .item-card { background: #fff; border: 1px solid #ddd; border-radius: 10px; padding: 15px; text-align: center; cursor: pointer; display: flex; flex-direction: column; justify-content: space-between; }
 .item-card img { width: 100%; height: 120px; object-fit: contain; margin-bottom: 10px; }
-
-/* FIX LINE-CLAMP */
-.item-card h4 { 
-    font-size: 13px; margin-bottom: 8px; line-height: 1.2; word-wrap: break-word; overflow: hidden; 
-    display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 2; 
-    line-clamp: 2; /* Proprietà standard */
-    min-height: 32px; 
-}
-
+.item-card h4 { font-size: 13px; margin-bottom: 5px; }
 .item-card p { font-size: 11px; color: #666; line-height: 1.3; }
+
 .bottom-dock-container { background: #fff; border-top: 1px solid #333; }
 .dock-row { padding: 10px 25px; min-height: 125px; display: flex; align-items: center; }
 .miniatures-container { display: flex; gap: 15px; overflow-x: auto; }
+
 .miniature { position: relative; width: 135px; min-width: 135px; border: 1px solid #eee; padding: 8px; background: #fff; text-align: center; border-radius: 5px; }
 .miniature img { width: 100%; height: 50px; object-fit: contain; margin-bottom: 5px; }
 .miniature p { font-size: 10px; line-height: 1.2; color: #333; overflow-wrap: anywhere; }
 .miniature .ml-info { display: block; font-size: 11px; font-weight: bold; color: #1b4b6b; margin-top: 4px; }
 .delete-btn { position: absolute; top: -8px; right: -8px; background: #ff4d4d; color: white; border: none; border-radius: 50%; width: 20px; height: 20px; cursor: pointer; font-weight: bold; z-index: 10; }
-.specifiche-tecniche { margin-top: 30px; background: #fff; padding: 20px; border-radius: 10px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); }
-.container-pdf-btn { text-align: right; margin-bottom: 10px; }
-.btn-pdf { background-color: #d9534f; color: white; border: none; padding: 10px 20px; border-radius: 5px; cursor: pointer; font-weight: bold; }
-
-/* FIX PRINT-COLOR-ADJUST */
-@media print {
-    #main-nav, .sidebar-componenti, .bottom-dock-container, .container-pdf-btn, button[onclick="window.print()"] { display: none !important; }
-    body { background: white !important; overflow: visible !important; }
-    .page-section { display: none !important; }
-    #preventivo-page { display: block !important; padding: 0 !important; margin: 0 !important; }
-    .preventivo-layout { display: flex !important; flex-direction: row !important; gap: 40px !important; align-items: start !important; }
-    #render-final-container { 
-        min-height: 500px !important; 
-        -webkit-print-color-adjust: exact; 
-        print-color-adjust: exact; /* Proprietà standard */
-    }
-}
-
-#img-render-bottiglia, #img-render-tappo { pointer-events: none; }
-
-/* --- NUOVO PANNELLO COLORAZIONE --- */
-.color-picker-panel {
-    margin-top: 20px;
-    padding: 15px;
-    background: #f9f9f9;
-    border-radius: 8px;
-    border: 1px solid #ddd;
-}
-
-.target-selector {
-    display: flex;
-    gap: 5px;
-    margin-bottom: 15px;
-}
-
-.target-btn {
-    flex: 1;
-    padding: 8px;
-    font-size: 11px;
-    border: 1px solid #ccc;
+/* Stile Tabella Specifiche Tecniche */
+.specifiche-tecniche {
+    margin-top: 30px;
     background: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+}
+/* Modifica per mantenere il titolo dentro la card */
+.item-card h4 {
+    font-size: 13px;
+    margin-bottom: 8px;
+    line-height: 1.2;
+    
+    /* Forza il testo a stare dentro */
+    word-wrap: break-word;       /* Spezza le parole troppo lunghe */
+    overflow: hidden;            /* Nasconde ciò che esce */
+    display: -webkit-box;        /* Crea un contenitore flessibile */
+    -webkit-line-clamp: 2;       /* Numero massimo di righe visibili (es. 2) */
+    line-clamp: 2;
+    -webkit-box-orient: vertical;
+    min-height: 32px;            /* Mantiene l'allineamento costante tra le card */
+}
+
+/* Opzionale: aggiusta il padding della card per dare respiro al testo */
+.item-card {
+    padding: 12px;
+    overflow: hidden;            /* Impedisce a qualsiasi elemento di uscire */
+}
+/* --- REGOLE PER IL PULSANTE PDF (VISUALIZZAZIONE A SCHERMO) --- */
+.container-pdf-btn {
+    text-align: right;
+    margin-bottom: 20px;
+}
+
+.btn-pdf {
+    background-color: #d9534f;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
     cursor: pointer;
     font-weight: bold;
     text-transform: uppercase;
-    transition: all 0.2s;
+    transition: background 0.3s;
 }
 
-.target-btn.active {
-    background: #1b4b6b;
-    color: white;
-    border-color: #1b4b6b;
+.btn-pdf:hover {
+    background-color: #c9302c;
 }
 
-.palette-grid {
-    display: grid;
-    grid-template-columns: repeat(5, 1fr);
-    gap: 8px;
-    margin-bottom: 15px;
+/* --- AGGIORNAMENTO PER COLORAZIONE RENDER --- */
+
+/* Assicura che i layer della maschera coprano esattamente l'area del contenitore */
+#mask-bottiglia-layer, 
+#mask-tappo-layer {
+    background-color: transparent;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain;
+    /* Proprietà per il ritaglio (stencil) */
+    -webkit-mask-repeat: no-repeat;
+    mask-repeat: no-repeat;
+    -webkit-mask-size: contain;
+    mask-size: contain;
+    -webkit-mask-position: center;
+    mask-position: center;
 }
 
-.color-dot {
-    width: 100%;
-    aspect-ratio: 1 / 1;
-    border-radius: 50%;
-    border: 2px solid #ddd;
-    cursor: pointer;
-    transition: transform 0.2s;
+/* Stile per i bottoni di selezione (Bottiglia/Tappo/Entrambi) */
+.btn-color-target {
+    transition: all 0.2s ease;
+    border-radius: 4px;
+    font-weight: bold;
+    color: #333;
 }
 
-.color-dot:hover {
+.btn-color-target:hover {
+    background-color: #f0f7ff !important;
+}
+
+.btn-color-target.active {
+    box-shadow: 0 0 0 2px #1b4b6b;
+}
+
+/* Effetto hover sulla palette colori */
+#palette-colori div:hover {
     transform: scale(1.1);
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    border-color: #1b4b6b !important;
 }
 
-.color-dot.active {
-    border-color: #333;
-    box-shadow: 0 0 5px rgba(0,0,0,0.2);
+/* Ottimizzazione slider intensità */
+#slider-intensita {
+    -webkit-appearance: none;
+    appearance: none; /* Aggiunta questa riga per compatibilità standard */
+    background: #ccc;
+    outline: none;
+    border-radius: 5px;
 }
 
-.intensity-slider {
-    width: 100%;
-    margin: 10px 0;
+#slider-intensita::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none; /* Aggiunta questa riga anche qui */
+    width: 12px;
+    height: 12px;
+    background: #1b4b6b;
     cursor: pointer;
+    border-radius: 50%;
 }
 
-/* Transizione fluida per l'applicazione del colore sul render */
-#img-render-bottiglia, #img-render-tappo {
-    transition: filter 0.3s ease;
+/* --- REGOLE SPECIFICHE PER LA STAMPA / SALVATAGGIO PDF --- */
+@media print {
+    /* 1. Nasconde i menu di navigazione e il pulsante stesso */
+    #main-nav, .container-pdf-btn, button {
+        display: none !important;
+    }
+
+    /* 2. Resetta i margini del body e lo sfondo */
+    body {
+        background: white !important;
+        color: black !important;
+        overflow: visible !important;
+        margin: 0;
+        padding: 0;
+    }
+
+    /* 3. Nasconde tutte le sezioni tranne quella del preventivo */
+    .page-section {
+        display: none !important;
+    }
+
+    #preventivo-page {
+        display: block !important;
+        padding: 20px !important;
+        margin: 0 !important;
+        width: 100% !important;
+    }
+
+    /* 4. Assicura che il layout del preventivo (render + tabella) rimanga affiancato */
+    .preventivo-layout {
+        display: flex !important;
+        flex-direction: row !important;
+        align-items: flex-start !important;
+        gap: 30px !important;
+        page-break-inside: avoid;
+    }
+
+    /* 5. Ottimizzazione immagini e tabella per il PDF */
+    #render-final-container img {
+        max-width: 350px !important;
+        height: auto !important;
+    }
+
+    .specifiche-tecniche {
+        box-shadow: none !important;
+        border: 1px solid #eee !important;
+        flex: 1 !important;
+    }
+    
+    /* Forza la stampa dei colori di sfondo (come i titoli della tabella) */
+    * {
+        -webkit-print-color-adjust: exact !important;
+        print-color-adjust: exact !important;
+    }
 }

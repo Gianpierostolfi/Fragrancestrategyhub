@@ -69,11 +69,16 @@
         </section>
 
         <section id="preventivo-page" class="page-section">
-            <div style="padding: 40px; text-align: center;">
-                <h1 id="titolo-preventivo-dinamico" style="text-transform: uppercase; letter-spacing: 2px;"></h1>
-                <div id="contenuto-preventivo"></div>
-            </div>
-        </section>
+    <div style="padding: 40px; text-align: center;">
+        <h1 id="titolo-preventivo-dinamico" style="text-transform: uppercase; letter-spacing: 2px;"></h1>
+        
+        <div class="container-pdf-btn" style="text-align: right; max-width: 1000px; margin: 0 auto 20px auto;">
+            <button onclick="window.print()" class="btn-pdf">SALVA PDF</button>
+        </div>
+
+        <div id="contenuto-preventivo"></div>
+    </div>
+</section>
 
         <section id="fragranze-brand" class="page-section">
             <div class="section-header">
