@@ -226,6 +226,10 @@ function generaRender() {
                 ${maskBottiglia ? `<div id="mask-bottiglia-layer" data-src="${maskBottiglia}" style="position: absolute; width: 85%; height: 85%; z-index: 2; mix-blend-mode: multiply; opacity: 0; pointer-events: none; transition: opacity 0.3s; background-size: contain; background-position: center; background-repeat: no-repeat;"></div>` : ''}
                 ${maskTappo ? `<div id="mask-tappo-layer" data-src="${maskTappo}" style="position: absolute; width: 85%; height: 85%; z-index: 4; mix-blend-mode: multiply; opacity: 0; pointer-events: none; transition: opacity 0.3s; background-size: contain; background-position: center; background-repeat: no-repeat;"></div>` : ''}
                 
+                <div id="container-etichetta-trascinabile" style="position: absolute; z-index: 10; cursor: move; display: none; line-height: 0;">
+            <img id="etichetta-upload" src="" style="width: 100px; height: auto; pointer-events: none;">
+        </div>
+                
                 ${(!imgBottiglia && !imgTappo) ? '<span style="color: #999;">Seleziona i componenti per il render</span>' : ''}
             </div>
 
@@ -269,7 +273,7 @@ function generaRender() {
                             <div onclick="applicaColore('${c}')" style="aspect-ratio: 1; border-radius: 50%; background: ${c}; border: 1px solid #ddd; cursor: pointer;"></div>
                         `).join('')}
                     </div>
-
+                  
                     <div style="background: #f1f1f1; padding: 5px; border-radius: 4px;">
                         <div style="display: flex; justify-content: space-between; font-size: 9px; margin-bottom: 2px;">
                             <span>INTENSITÀ</span>
@@ -278,7 +282,19 @@ function generaRender() {
                         <input type="range" id="slider-intensita" min="0" max="100" value="50" style="width: 100%; height: 3px; accent-color: #1b4b6b;" oninput="cambiaIntensita(this.value)">
                     </div>
                 </div>
-            </div>
+           <div id="controllo-etichetta-container" style="padding: 10px; border: 1px solid #ddd; border-radius: 8px; background: #fefefe; margin-top: 15px;">
+                    <p style="font-weight: bold; font-size: 10px; margin-bottom: 8px; text-transform: uppercase; color: #1b4b6b;">Personalizzazione Etichetta:</p>
+                    <div style="margin-bottom: 10px;">
+                        <label style="font-size: 9px; display: block; margin-bottom: 3px; font-weight: bold;">CARICA LOGO/ETICHETTA:</label>
+                        <input type="file" id="input-file-etichetta" accept="image/*" onchange="gestisciCaricamentoEtichetta(this)" style="font-size: 9px; width: 100%;">
+                    </div>
+                    <div id="comandi-etichetta-attivi" style="display: none; border-top: 1px solid #eee; padding-top: 8px;">
+                        <label style="font-size: 9px; display: block; margin-bottom: 5px; font-weight: bold;">DIMENSIONE:</label>
+                        <input type="range" id="slider-etichetta" min="20" max="250" value="100" oninput="ridimensionaEtichetta(this.value)" style="width: 100%; height: 5px; accent-color: #1b4b6b;">
+                        <p style="font-size: 8px; color: #666; margin-top: 5px;">* Trascina l'immagine per posizionarla.</p>
+                    </div>
+                </div>
+                </div>
         </div>
     `;
 
@@ -474,4 +490,85 @@ function applicaColore(color) {
 function cambiaIntensita(val) {
     document.getElementById('valore-intensita').innerText = val + '%';
     if (coloreSelezionato !== 'transparent') applicaColore(coloreSelezionato);
+}
+// --- FUNZIONI PER GESTIONE ETICHETTA PERSONALIZZATA ---
+
+function gestisciCaricamentoEtichetta(input) {
+    if (input.files && input.files[0]) {
+        const reader = new FileReader();
+        reader.onload = function(e) {
+            const container = document.getElementById('container-etichetta-trascinabile');
+            const img = document.getElementById('etichetta-upload');
+            const controlliSlider = document.getElementById('comandi-etichetta-attivi');
+            
+            // Imposta l'immagine caricata
+            img.src = e.target.result;
+            
+            // Mostra il container e i comandi dello slider
+            container.style.display = 'block';
+            controlliSlider.style.display = 'block';
+            
+            // Posiziona l'etichetta al centro del render inizialmente
+            container.style.top = '45%';
+            container.style.left = '50%';
+            container.style.transform = 'translate(-50%, -50%)';
+            
+            // Attiva la funzione di trascinamento
+            rendiTrascinabile(container);
+        };
+        reader.readAsDataURL(input.files[0]);
+    }
+}
+
+function ridimensionaEtichetta(valore) {
+    const img = document.getElementById('etichetta-upload');
+    if (img) {
+        img.style.width = valore + 'px';
+    }
+}
+
+function rendiTrascinabile(elemento) {
+    let pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;
+    
+    elemento.onmousedown = dragMouseDown;
+    // Supporto per dispositivi touch
+    elemento.ontouchstart = dragMouseDown;
+
+    function dragMouseDown(e) {
+        e = e || window.event;
+        // Rimuove il transform translate per evitare conflitti con il posizionamento top/left durante il drag
+        elemento.style.transform = 'none';
+        
+        // Prende la posizione del cursore o del tocco
+        pos3 = (e.type === 'touchstart') ? e.touches[0].clientX : e.clientX;
+        pos4 = (e.type === 'touchstart') ? e.touches[0].clientY : e.clientY;
+        
+        document.onmouseup = stopElementDrag;
+        document.ontouchend = stopElementDrag;
+        
+        document.onmousemove = elementDrag;
+        document.ontouchmove = elementDrag;
+    }
+
+    function elementDrag(e) {
+        e = e || window.event;
+        const clientX = (e.type === 'touchmove') ? e.touches[0].clientX : e.clientX;
+        const clientY = (e.type === 'touchmove') ? e.touches[0].clientY : e.clientY;
+        
+        pos1 = pos3 - clientX;
+        pos2 = pos4 - clientY;
+        pos3 = clientX;
+        pos4 = clientY;
+        
+        // Imposta la nuova posizione
+        elemento.style.top = (elemento.offsetTop - pos2) + "px";
+        elemento.style.left = (elemento.offsetLeft - pos1) + "px";
+    }
+
+    function stopElementDrag() {
+        document.onmouseup = null;
+        document.onmousemove = null;
+        document.ontouchend = null;
+        document.ontouchmove = null;
+    }
 }
