@@ -290,7 +290,7 @@ function generaRender() {
                     </div>
                     <div id="comandi-etichetta-attivi" style="display: none; border-top: 1px solid #eee; padding-top: 8px;">
                         <label style="font-size: 9px; display: block; margin-bottom: 5px; font-weight: bold;">DIMENSIONE:</label>
-                        <input type="range" id="slider-etichetta" min="20" max="250" value="100" oninput="ridimensionaEtichetta(this.value)" style="width: 100%; height: 5px; accent-color: #1b4b6b;">
+                        <input type="range" id="slider-etichetta" min="1" max="100" value="30" oninput="ridimensionaEtichetta(this.value)" style="width: 100%; height: 5px; accent-color: #1b4b6b;">
                         <p style="font-size: 8px; color: #666; margin-top: 5px;">* Trascina l'immagine per posizionarla.</p>
                     </div>
                 </div>
@@ -479,6 +479,15 @@ function applicaColore(color) {
             layer.style.webkitMaskSize = layer.style.maskSize = "contain";
             layer.style.webkitMaskRepeat = layer.style.maskRepeat = "no-repeat";
             layer.style.webkitMaskPosition = layer.style.maskPosition = "center";
+            
+            // CONDIZIONE SPECIALE PER IL BIANCO
+            // Se il colore è bianco, usiamo 'screen' o 'normal' perché 'multiply' lo rende invisibile
+            if (color.toLowerCase() === '#ffffff' || color.toLowerCase() === 'white') {
+                layer.style.mixBlendMode = 'normal'; 
+            } else {
+                layer.style.mixBlendMode = 'multiply';
+            }
+            
             layer.style.opacity = intensita;
         }
     };
@@ -501,19 +510,31 @@ function gestisciCaricamentoEtichetta(input) {
             const img = document.getElementById('etichetta-upload');
             const controlliSlider = document.getElementById('comandi-etichetta-attivi');
             
-            // Imposta l'immagine caricata
+            // 1. Imposta l'immagine caricata
             img.src = e.target.result;
             
-            // Mostra il container e i comandi dello slider
+            // 2. Rende visibili i contenitori
             container.style.display = 'block';
             controlliSlider.style.display = 'block';
             
-            // Posiziona l'etichetta al centro del render inizialmente
-            container.style.top = '45%';
-            container.style.left = '50%';
-            container.style.transform = 'translate(-50%, -50%)';
+            // 3. POSIZIONAMENTO PULITO (Senza translate)
+            // Posizioniamo l'etichetta in un punto fisso (es. 20% dall'alto e 20% da sinistra)
+            // senza usare trasformazioni che mandano in tilt il PDF e il trascinamento
+            container.style.top = '20%';
+            container.style.left = '20%';
+            container.style.transform = 'none'; 
             
-            // Attiva la funzione di trascinamento
+            // 4. DIMENSIONE IN PERCENTUALE
+            // Invece di pixel (px), diciamo che l'etichetta deve essere larga 
+            // ad esempio il 30% della larghezza del render.
+            img.style.width = '30%'; 
+            img.style.height = 'auto';
+            
+            // Portiamo lo slider allo stesso valore (30) per coerenza visiva
+            const slider = document.getElementById('slider-etichetta');
+            if (slider) slider.value = 30;
+
+            // 5. Attiva la funzione di trascinamento
             rendiTrascinabile(container);
         };
         reader.readAsDataURL(input.files[0]);
@@ -523,7 +544,8 @@ function gestisciCaricamentoEtichetta(input) {
 function ridimensionaEtichetta(valore) {
     const img = document.getElementById('etichetta-upload');
     if (img) {
-        img.style.width = valore + 'px';
+        // Ora il valore dello slider viene interpretato come percentuale della larghezza del render
+        img.style.width = valore + '%';
     }
 }
 
@@ -566,6 +588,16 @@ function rendiTrascinabile(elemento) {
     }
 
     function stopElementDrag() {
+        const parent = elemento.parentElement;
+        
+        // Calcoliamo la posizione finale in percentuale rispetto al contenitore
+        const topPercent = (elemento.offsetTop / parent.offsetHeight) * 100;
+        const leftPercent = (elemento.offsetLeft / parent.offsetWidth) * 100;
+        
+        // Applichiamo le percentuali (questo corregge lo spostamento nel PDF)
+        elemento.style.top = topPercent + "%";
+        elemento.style.left = leftPercent + "%";
+
         document.onmouseup = null;
         document.onmousemove = null;
         document.ontouchend = null;

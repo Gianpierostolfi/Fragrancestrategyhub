@@ -193,7 +193,14 @@ body { font-family: 'Helvetica Neue', Arial, sans-serif; background-color: #ffff
         max-width: 350px !important;
         height: auto !important;
     }
-
+#container-etichetta-trascinabile {
+        display: block !important;
+        position: absolute !important;
+        z-index: 9999 !important;
+        transform: none !important; /* Forza la rimozione di ogni traslazione */
+        margin: 0 !important;
+        padding: 0 !important;
+    }
     .specifiche-tecniche {
         box-shadow: none !important;
         border: 1px solid #eee !important;
