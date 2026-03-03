@@ -91,66 +91,6 @@ body { font-family: 'Helvetica Neue', Arial, sans-serif; background-color: #ffff
     background-color: #c9302c;
 }
 
-/* --- AGGIORNAMENTO PER COLORAZIONE RENDER --- */
-
-/* Assicura che i layer della maschera coprano esattamente l'area del contenitore */
-#mask-bottiglia-layer, 
-#mask-tappo-layer {
-    background-color: transparent;
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: contain;
-    /* Proprietà per il ritaglio (stencil) */
-    -webkit-mask-repeat: no-repeat;
-    mask-repeat: no-repeat;
-    -webkit-mask-size: contain;
-    mask-size: contain;
-    -webkit-mask-position: center;
-    mask-position: center;
-}
-
-/* Stile per i bottoni di selezione (Bottiglia/Tappo/Entrambi) */
-.btn-color-target {
-    transition: all 0.2s ease;
-    border-radius: 4px;
-    font-weight: bold;
-    color: #333;
-}
-
-.btn-color-target:hover {
-    background-color: #f0f7ff !important;
-}
-
-.btn-color-target.active {
-    box-shadow: 0 0 0 2px #1b4b6b;
-}
-
-/* Effetto hover sulla palette colori */
-#palette-colori div:hover {
-    transform: scale(1.1);
-    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
-    border-color: #1b4b6b !important;
-}
-
-/* Ottimizzazione slider intensità */
-#slider-intensita {
-    -webkit-appearance: none;
-    appearance: none; /* Aggiunta questa riga per compatibilità standard */
-    background: #ccc;
-    outline: none;
-    border-radius: 5px;
-}
-
-#slider-intensita::-webkit-slider-thumb {
-    -webkit-appearance: none;
-    appearance: none; /* Aggiunta questa riga anche qui */
-    width: 12px;
-    height: 12px;
-    background: #1b4b6b;
-    cursor: pointer;
-    border-radius: 50%;
-}
-
 /* --- REGOLE SPECIFICHE PER LA STAMPA / SALVATAGGIO PDF --- */
 @media print {
     /* 1. Nasconde i menu di navigazione e il pulsante stesso */
@@ -193,14 +133,7 @@ body { font-family: 'Helvetica Neue', Arial, sans-serif; background-color: #ffff
         max-width: 350px !important;
         height: auto !important;
     }
-#container-etichetta-trascinabile {
-        display: block !important;
-        position: absolute !important;
-        z-index: 9999 !important;
-        transform: none !important; /* Forza la rimozione di ogni traslazione */
-        margin: 0 !important;
-        padding: 0 !important;
-    }
+
     .specifiche-tecniche {
         box-shadow: none !important;
         border: 1px solid #eee !important;

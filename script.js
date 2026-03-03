@@ -304,10 +304,37 @@ function generaRender() {
 }
 
 function resetConfiguratore() {
-    state.selezioni = { bottiglia: null, tappo: null, cache: null, pompa: null };
+    // 1. Reset delle variabili di stato (mantenendo intatta la struttura originale)
+    state.selezioni = { bottiglia: null, tappo: null, cache: null, pompa: null, sottofamiglia: null };
     state.filtriAttivi = {};
+    
+    // 2. Pulizia dell'input del nome preventivo
     document.getElementById('input-nome-preventivo').value = "";
+    
+    // 3. Nasconde la tab preventivo (come da logica originale)
     document.getElementById('tab-preventivo').style.display = 'none';
+
+    // --- AGGIUNTA SPECIFICA RICHIESTA ---
+    
+    // 4. Cancella il box blu dell'essenza al fondo del canvas
+    const notesContainer = document.getElementById('notes-container');
+    if (notesContainer) {
+        notesContainer.innerHTML = "";
+    }
+
+    // 5. Reset dei menu a tendina della famiglia e sottofamiglia olfattiva
+    const selectFamiglia = document.getElementById('select-famiglia');
+    const containerSottofamiglia = document.getElementById('container-dropdown-essenze');
+    
+    if (selectFamiglia) {
+        selectFamiglia.selectedIndex = 0; // Riporta la famiglia su "Seleziona Famiglia"
+    }
+    
+    if (containerSottofamiglia) {
+        containerSottofamiglia.remove(); // Rimuove fisicamente il menu della sottofamiglia
+    }
+
+    // 6. Ripristino visualizzazione sidebar e render
     aggiornaMiniature();
     gestisciSblocchi();
     caricaCategoria('bottiglia');
@@ -437,12 +464,45 @@ function mostraSceltaEssenza() {
     state.selezioni.sottofamiglia = sotto; 
 
     if (sotto && notesContainer) {
+        // Cerchiamo i dati dell'essenza nel database caricato dal CSV
+        const datiEssenza = db.essenze.find(e => e.Sottofamiglia === sotto);
+        
+        let iconeHtml = '';
+        if (datiEssenza) {
+            // Ciclo per le 5 colonne delle materie prime (colonna1 ... colonna5)
+            for (let i = 1; i <= 5; i++) {
+                const nomeMateria = datiEssenza[`colonna${i}`];
+                if (nomeMateria && nomeMateria.trim() !== "") {
+                    // Creiamo il cerchietto con l'immagine e il nome sotto
+                    iconeHtml += `
+                        <div style="display: flex; flex-direction: column; align-items: center; gap: 5px; width: 65px;">
+                            <div style="width: 45px; height: 45px; border-radius: 50%; overflow: hidden; border: 1.5px solid rgba(255,255,255,0.5); background: #fff; box-shadow: 0 2px 4px rgba(0,0,0,0.2);">
+                                <img src="assets/${nomeMateria.trim()}.png" style="width: 100%; height: 100%; object-fit: cover;" onerror="this.style.display='none'">
+                            </div>
+                            <span style="color: white; font-size: 9px; text-align: center; line-height: 1.1; text-transform: capitalize; font-weight: 300;">
+                                ${nomeMateria.replace(/_/g, ' ')}
+                            </span>
+                        </div>`;
+                }
+            }
+        }
+
+        // Layout Box Blu aggiornato con Descrizione e Materie Prime
         notesContainer.innerHTML = `
-            <div style="padding:15px; background:#1b4b6b; color:white; border-radius:5px; margin-top:10px;">
-                <strong>Sottofamiglia selezionata:</strong> ${sotto}
+            <div style="display: flex; align-items: center; justify-content: space-between; background: #1b4b6b; color: white; padding: 15px 30px; border-radius: 50px; width: 100%; min-height: 90px; gap: 25px; margin-top: 15px; box-sizing: border-box; box-shadow: 0 4px 10px rgba(0,0,0,0.15);">
+                <div style="flex: 1; text-align: left;">
+                    <span style="font-weight: bold; text-transform: uppercase; font-size: 15px; display: block; margin-bottom: 4px; letter-spacing: 1px;">${sotto}</span>
+                    <span style="font-size: 11px; opacity: 0.85; display: block; font-style: italic; line-height: 1.3; max-width: 400px;">
+                        ${datiEssenza ? datiEssenza.descrizione : ''}
+                    </span>
+                </div>
+                <div style="display: flex; gap: 12px; align-items: flex-start;">
+                    ${iconeHtml}
+                </div>
             </div>`;
     }
 }
+
 let coloreSelezionato = 'transparent';
 let parteTarget = 'bottiglia';
 
