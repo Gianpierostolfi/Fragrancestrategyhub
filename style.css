@@ -209,18 +209,3 @@ body { font-family: 'Helvetica Neue', Arial, sans-serif; background-color: #ffff
     object-fit: contain;
     display: block;
 }
-/* Stile per le miniature profumi brand nel configuratore */
-#brand-suggestions-wrapper::-webkit-scrollbar {
-    height: 4px;
-}
-
-#brand-suggestions-wrapper::-webkit-scrollbar-thumb {
-    background: #444;
-    border-radius: 10px;
-}
-
-#brand-suggestions-wrapper span {
-    font-family: 'Helvetica Neue', Arial, sans-serif;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-}
