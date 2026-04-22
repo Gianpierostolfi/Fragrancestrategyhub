@@ -1,8 +1,8 @@
 ﻿codice;famiglia olfattiva;Sottofamiglia;prezzo basso €./kg.;prezzo medio €./kg.;prezzo top €./kg.;descrizione;materie_prime;colonna1;colonna2;colonna3;colonna4;colonna5
-100;Agrumata_Esperidata;Agrumata;40;60;190;Essenza classica agrumata;Bergamotto, Limone, Mandarino, Arancia;bergamotto;limone;mandarino;arancia;
-101;Agrumata_Esperidata;Agrumata Speziata;50;70;200;Agrumi con accenti caldi;Zenzero, Pepe Rosa, Cardamomo;zenzero;pepe_rosa;cardamomo;;
-102;Agrumata_Esperidata;Agrumata Aromatica;60;80;210;Agrumi ed erbe officinali;Lavanda, Rosmarino, Timo, Verbena;lavanda;rosmarino;timo;verbena;
-103;Agrumata_Esperidata;Agrumata Legnosa;80;100;230;Agrumi con fondo legnoso secco;Cedro, Sandalo, Petitgrain, Agrumi;cedro;sandalo;petitgrain;agrumi;
+100;Agrumata;Agrumata;40;60;190;Essenza classica agrumata;Bergamotto, Limone, Mandarino, Arancia;bergamotto;limone;mandarino;arancia;
+101;Agrumata;Agrumata Speziata;50;70;200;Agrumi con accenti caldi;Zenzero, Pepe Rosa, Cardamomo;zenzero;pepe_rosa;cardamomo;;
+102;Agrumata;Agrumata Aromatica;60;80;210;Agrumi ed erbe officinali;Lavanda, Rosmarino, Timo, Verbena;lavanda;rosmarino;timo;verbena;
+103;Agrumata;Agrumata Legnosa;80;100;230;Agrumi con fondo legnoso secco;Cedro, Sandalo, Petitgrain, Agrumi;cedro;sandalo;petitgrain;agrumi;
 104;Floreale;Monofloreale;30;40;100;Focus su un singolo fiore;Rosa, Mughetto, Gelsomino, Tuberosa;rosa;mughetto;gelsomino;tuberosa;
 105;Floreale;Floreale Muschiata;40;50;110;Fiori delicati e muschi;Muschio Bianco, Iris, Peonia;muschio_bianco;iris;peonia;;
 106;Floreale;Bouquet Floreale;50;60;120;Composizione di più fiori;Mix di Fiori Bianchi, Rosa, Ylang Ylang, Giglio;mix_di_fiori_bianchi;rosa;ylang_ylang;giglio;
@@ -12,19 +12,19 @@
 110;Floreale;Floreale Marina;80;90;150;Fiori acquatici e trasparenti;Ninfea, Loto, Note Ozoniche;ninfea;loto;note_ozoniche;;
 111;Fougere;Fougere Ambrata Dolce;50;60;120;Fougere con anima gourmand;Vaniglia, Fava Tonka, Benzoino, Lavanda;vaniglia;fava_tonka;benzoino;lavanda;
 112;Fougere;Fougere Aromatica;70;80;140;Fougere con prevalenza di erbe;Salvia Sclarea, Artemisia, Menta;salvia_sclarea;artemisia;menta;lavanda;
-113;Fougere;Fougere Legnoso;;;;Fougere;Lavanda, Geranio, Muschio di Quercia (o Evernyl), Vetiver, Legno di Cedro;Lavanda;geranio;muschio_di_quercia;;vetiver
+113;Fougere;Fougere Legnoso;50;60;120;Fougere;Lavanda, Geranio, Muschio di Quercia (o Evernyl), Vetiver, Legno di Cedro;Lavanda;geranio;muschio_di_quercia;;vetiver
 114;Chypre;Chypre Fruttata;50;60;120;Chypre con note dolci di frutta;Pera, Albicocca, Patchouli, Pesca;pera;albicocca;patchouli;pesca;
 115;Chypre;Chypre Cuoiata;70;80;140;Chypre con accenti di pelle;Betulla, Cuoio, Castoreum, Muschio di quercia;betulla;cuoio;castoreum;muschio_di_quercia;
 116;Chypre;Chypre Verde;90;100;160;Chypre terroso e fresco;Galbano, Aghi di Pino, Note Erbacee;galbano;aghi_di_pino;note_erbacee;;
-117;Chypre;Chypre Legnoso;;;;Chypre;Bergamotto, Patchouli, Vetiver, Legno di Cedro, Muschio di Quercia;bergamotto;patchouli;vetiver;cedro;
+117;Chypre;Chypre Legnoso;70;80;140;Chypre;Bergamotto, Patchouli, Vetiver, Legno di Cedro, Muschio di Quercia;bergamotto;patchouli;vetiver;cedro;
 118;Chypre;Chypre Floreale;100;110;170;Chypre con cuore dominante fiorito;Iris, Rosa, Labdano, Pathcouli;iris;rosa;labdano;patchouli;
 119;Legnosa;Legnosa;30;40;100;Focus su legni secchi o cremosi;Cedro, Sandalo, Vetiver, Guaiaco;cedro;sandalo;vetiver;guaiaco;
 120;Legnosa;Legnosa Speziata;50;60;120;Legni con spezie vibranti;Zafferano, Pepe Nero, Cedro;zafferano;pepe_nero;cedro;cardamomo;
 121;Legnosa;Legnosa Aromatica;70;80;140;Legni ed erbe di campo;Salvia, Vetiver, Cardamomo, Lavanda;salvia;vetiver;cardamomo;lavanda;
 122;Legnosa;Legnosa Orientale Oud;90;120;160;Legni scuri e resine pregiate;Oud, Patchouli, Incenso;oud;patchouli;incenso;;
 123;Legnosa;Legnosa Fruttata;50;60;120;Legni con sfaccettature fruttate;Fico, Prugna, Sandalo;fico;prugna;sandalo;;
-124;Legnosa;Legnosa Orientale;;;;;Oud, Patchouli, Legno di Sandalo, Benzoino, Labdano, Vaniglia;oud;patchouli;sandalo;benzoino;labdano
-125;Legnosa;Legnosa Floreale;;;;;Legno di Sandalo, Legno di Cedro, Iris (polveroso), Violetta, Gelsomino, Rosa;sandalo;cedro;iris;violetta;gelsomino
+124;Legnosa;Legnosa Orientale;90;120;160;Legnosa;Oud, Patchouli, Legno di Sandalo, Benzoino, Labdano, Vaniglia;oud;patchouli;sandalo;benzoino;labdano
+125;Legnosa;Legnosa Floreale;70;80;140;Legnosa;Legno di Sandalo, Legno di Cedro, Iris (polveroso), Violetta, Gelsomino, Rosa;sandalo;cedro;iris;violetta;gelsomino
 126;Ambrata;Ambrata Dolce - Gourmand;50;60;110;Note dolci e commestibili;Vaniglia, Benzoino, Caramello, Ciocclato;vaniglia;benzoino;caramello;mandorla;cioccolato
 127;Ambrata;Ambrata Floreale;60;70;120;Calore ambrato e fiori esotici;Ylang Ylang, Ambra, Gelsomino, Orchidea, Tiaré;ylang_ylang;ambra;gelsomino;orchidea;tiaré
 128;Ambrata;Ambrata Agrumata;70;80;130;Ambra con apertura frizzante;Ambra, Arancia Dolce, Bergamotto, Labdano;ambra;arancia_dolce;bergamotto;labdano;
@@ -39,5 +39,5 @@
 137;Cuoiata;Cuoiata Affumicata;60;70;130;Cuoio bruciato e fumo;Catrame di Betulla, Incenso;catrame_di_betulla;incenso;;;
 138;Aromatica*;Aromatica Marina;50;60;120;Sentori marini;Calone, Alge Marine, Sale;calone;alghe_marine;sale;;
 139;Aromatica*;Aromatica Legnosa;70;80;140;Sentori legnosi;Patchouli, Pino, Eucalipto;patchouli;pino;eucalipto;;
-140;Aromatica*;Aromatico Speziato;;;;;Basilico, Menta, Lavanda, Pepe Nero, Cardamomo, Zenzero;basilico;menta;lavanda;pepe_nero;cardamomo
-141;Aromatica*;Aromatico Fougère;;;;;Lavanda, Rosmarino, Salvia, Geranio, Fava Tonka, Muschio di Quercia;lavanda;rosmarino;salvia;geranio;fava_tonka
+140;Aromatica*;Aromatico Speziato;60;70;130;Aromatica;Basilico, Menta, Lavanda, Pepe Nero, Cardamomo, Zenzero;basilico;menta;lavanda;pepe_nero;cardamomo
+141;Aromatica*;Aromatico Fougère;50;60;120;Aromatica;Lavanda, Rosmarino, Salvia, Geranio, Fava Tonka, Muschio di Quercia;lavanda;rosmarino;salvia;geranio;fava_tonka
